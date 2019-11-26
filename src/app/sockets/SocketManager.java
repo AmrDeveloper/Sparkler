@@ -7,10 +7,18 @@ import java.net.URISyntaxException;
 
 public class SocketManager {
 
-    private Socket mSocket;
+    private static Socket mSocket;
+    private volatile static SocketManager mSocketManager;
 
-    public SocketManager() {
+    private SocketManager() {
 
+    }
+
+    public static SocketManager getInstance(){
+        if(mSocketManager == null){
+            mSocketManager = new SocketManager();
+        }
+        return mSocketManager;
     }
 
     public void initSocket(String socketUrl) {

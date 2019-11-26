@@ -55,7 +55,7 @@ public class MainController implements Initializable {
     @FXML private Button socketEventStopAll;
     @FXML private Button socketEventAddListener;
 
-    private final SocketManager socketManager = new SocketManager();
+    private final SocketManager socketManager = SocketManager.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
