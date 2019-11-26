@@ -3,10 +3,13 @@ package app.controllers;
 import app.model.*;
 
 import app.net.HttpMethod;
+import app.sockets.SocketManager;
 import app.utils.Language;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,10 +56,13 @@ public class MainController implements Initializable {
     @FXML private Button socketEventStopAll;
     @FXML private Button socketEventAddListener;
 
+    private final SocketManager socketManager = new SocketManager();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupListViews();
         setupComboBoxes();
+        setupButtons();
     }
 
     private void setupListViews(){
@@ -65,7 +71,6 @@ public class MainController implements Initializable {
         requestHeadersListView .setCellFactory(studentListView -> new AttributeListCell());
         requestBodyDataListView.setCellFactory(studentListView -> new AttributeListCell());
         socketEventListView.setCellFactory(studentListView -> new EventListCell());
-        socketEventListView.getItems().add(new Event("",0,false));
     }
 
     private void setupComboBoxes(){
@@ -77,5 +82,28 @@ public class MainController implements Initializable {
 
         responseBodyComboBox.getItems().setAll(Language.values());
         responseBodyComboBox.getSelectionModel().select(0);
+    }
+
+    private void setupButtons(){
+        socketConnectButton.setOnMouseClicked(event -> socketConnectButtonAction());
+    }
+
+    private void socketConnectButtonAction(){
+        String socketUrl = socketUrlTextField.getText().trim();
+        if (socketUrl.isEmpty()) {
+            System.out.println("Invalid url");
+            return;
+        }
+
+        if (socketManager.isSocketConnected()) {
+            socketManager.disconnectSocket();
+            socketUrlTextField.setEditable(true);
+            socketConnectButton.setText("Connected");
+        } else {
+            socketManager.connectSocket(socketUrl, () -> {
+                socketUrlTextField.setEditable(false);
+                socketConnectButton.setText("Disconnected");
+            });
+        }
     }
 }

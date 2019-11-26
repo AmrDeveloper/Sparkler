@@ -5,10 +5,9 @@ import io.socket.client.Socket;
 
 import java.net.URISyntaxException;
 
-class SocketManager {
+public class SocketManager {
 
     private Socket mSocket;
-    private boolean isSocketConnected;
 
     public SocketManager() {
 
@@ -16,16 +15,23 @@ class SocketManager {
 
     public void initSocket(String socketUrl) {
         try {
+            if (mSocket != null) {
+                mSocket.close();
+            }
             mSocket = IO.socket(socketUrl);
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void connectSocket() {
-        if (!isSocketConnected) {
+    public void connectSocket(String socketUrl, SocketListener listener) {
+        if (mSocket == null) {
+            initSocket(socketUrl);
+        }
+
+        if (!mSocket.connected()) {
             mSocket.connect();
-            isSocketConnected = true;
+            listener.onEventSuccess();
         }
     }
 
@@ -43,6 +49,12 @@ class SocketManager {
 
     public void disconnectSocket() {
         mSocket.disconnect();
-        isSocketConnected = false;
+    }
+
+    public boolean isSocketConnected() {
+        if (mSocket == null) {
+            return false;
+        }
+        return mSocket.connected();
     }
 }
