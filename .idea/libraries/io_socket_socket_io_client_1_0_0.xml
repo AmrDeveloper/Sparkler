@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="io.socket:socket.io-client:1.0.0" type="repository">
+    <properties maven-id="io.socket:socket.io-client:1.0.0" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/socket.io-client-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/engine.io-client-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/okhttp-3.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/okio-1.13.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json-20090211.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
