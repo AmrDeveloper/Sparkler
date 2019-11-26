@@ -1,9 +1,9 @@
 package app.controllers;
 
-import app.model.Request;
-import app.model.Attribute;
-import app.model.Event;
+import app.model.*;
 
+import app.net.HttpMethod;
+import app.utils.Language;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -17,7 +17,7 @@ public class MainController implements Initializable {
     @FXML private ListView<Request> requestsListView;
 
     @FXML private TextField httpRequestTextField;
-    @FXML private ComboBox<String> httpReqComboBox;
+    @FXML private ComboBox<HttpMethod> httpReqComboBox;
     @FXML private Button sendRequestButton;
 
     @FXML private Label statusLabel;
@@ -32,14 +32,14 @@ public class MainController implements Initializable {
 
     @FXML private TabPane requestBodyTabPane;
     @FXML private ListView<Attribute> requestBodyDataListView;
-    @FXML private ComboBox<String> requestBodyRowComboBox;
+    @FXML private ComboBox<Language> requestBodyRowComboBox;
     @FXML private Button requestBodyRowCopyButton;
     @FXML private Button requestBodyRowClearButton;
 
     @FXML private TabPane responseTabPane;
     @FXML private Tab responseBodyTab;
     @FXML private Tab responseHeadersTab;
-    @FXML private ComboBox<String> responseBodyComboBox;
+    @FXML private ComboBox<Language> responseBodyComboBox;
     @FXML private Button responseBodyCopyButton;
     @FXML private Button responseBodyClearButton;
 
@@ -55,6 +55,26 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setupListViews();
+        setupComboBoxes();
+    }
 
+    private void setupListViews(){
+        requestsListView.setCellFactory(studentListView -> new RequestListCell());
+        requestParamsListView.setCellFactory(studentListView -> new AttributeListCell());
+        requestHeadersListView .setCellFactory(studentListView -> new AttributeListCell());
+        requestBodyDataListView.setCellFactory(studentListView -> new AttributeListCell());
+        socketEventListView.setCellFactory(studentListView -> new EventListCell());
+    }
+
+    private void setupComboBoxes(){
+        httpReqComboBox.getItems().setAll(HttpMethod.values());
+        httpReqComboBox.getSelectionModel().select(0);
+
+        requestBodyRowComboBox.getItems().setAll(Language.values());
+        requestBodyRowComboBox.getSelectionModel().select(0);
+
+        responseBodyComboBox.getItems().setAll(Language.values());
+        responseBodyComboBox.getSelectionModel().select(0);
     }
 }
