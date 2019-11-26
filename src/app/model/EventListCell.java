@@ -15,7 +15,7 @@ public class EventListCell extends SparklerListCell<Event> {
     @FXML private TextField eventNameField;
     @FXML private Button listenerButton;
 
-    private static final String EVENT_VIEW_LAYOUT = "views/event_view.fxml";
+    private static final String EVENT_VIEW_LAYOUT = "../views/event_view.fxml";
 
     public EventListCell() {
         super(EVENT_VIEW_LAYOUT);

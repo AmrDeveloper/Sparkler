@@ -65,6 +65,7 @@ public class MainController implements Initializable {
         requestHeadersListView .setCellFactory(studentListView -> new AttributeListCell());
         requestBodyDataListView.setCellFactory(studentListView -> new AttributeListCell());
         socketEventListView.setCellFactory(studentListView -> new EventListCell());
+        socketEventListView.getItems().add(new Event("",0,false));
     }
 
     private void setupComboBoxes(){
