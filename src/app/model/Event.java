@@ -35,4 +35,9 @@ public class Event {
     public void setListening(boolean listening) {
         isListening = listening;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

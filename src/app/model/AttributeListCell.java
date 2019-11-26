@@ -16,7 +16,7 @@ public class AttributeListCell extends SparklerListCell<Attribute> {
 
     private static final String EVENT_VIEW_LAYOUT = "views/attribute_view.fxml";
 
-    public AttributeListCell(String viewPath) {
+    public AttributeListCell() {
         super(EVENT_VIEW_LAYOUT);
     }
 

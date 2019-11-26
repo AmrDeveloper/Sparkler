@@ -60,12 +60,18 @@
                                                     <tabs>
                                                         <Tab fx:id="requestParamsTab" text="Params">
                                                             <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="615.0" />
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="615.0">
+                                                   <children>
+                                                      <ListView fx:id="requestParamsListView" layoutY="-29.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                   </children></AnchorPane>
                                                             </content>
                                                         </Tab>
                                                         <Tab fx:id="requestHeadersTab" text="Headers">
                                                             <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <ListView fx:id="requestHeadersListView" layoutX="54.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                   </children></AnchorPane>
                                                             </content>
                                                         </Tab>
                                                         <Tab fx:id="requestBodyTab" text="Body">
@@ -76,7 +82,10 @@
                                                                             <tabs>
                                                                                 <Tab fx:id="requestBodyDataTab" text="Data">
                                                                                     <content>
-                                                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <ListView fx:id="requestBodyDataListView" layoutX="14.0" layoutY="-47.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                     </children></AnchorPane>
                                                                                     </content>
                                                                                 </Tab>
                                                                                 <Tab fx:id="requestBodyRowTab" text="Row">
@@ -139,7 +148,7 @@
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
-                                                <TextField fx:id="socketUrlTextField" layoutX="74.0" layoutY="14.0" prefHeight="25.0" prefWidth="486.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="15.0" />
+                                                <TextField fx:id="socketUrlTextField" layoutX="74.0" layoutY="14.0" prefHeight="25.0" prefWidth="486.0" promptText="Socket Url" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="15.0" />
                                                 <Button fx:id="socketConnectButton" layoutX="569.0" layoutY="14.0" mnemonicParsing="false" text="Connect" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="15.0" />
                                                 <Label layoutX="11.0" layoutY="19.0" text="Socket Url : " AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0" />
                                                 <TextField fx:id="socketEmitKey" layoutX="75.0" layoutY="63.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" promptText="Key" AnchorPane.leftAnchor="75.0" />

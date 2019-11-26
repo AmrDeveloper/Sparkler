@@ -1,7 +1,9 @@
 package app.controllers;
 
+import app.model.Request;
 import app.model.Attribute;
 import app.model.Event;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -12,7 +14,7 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
 
     @FXML private TextField searchTextField;
-    @FXML private ListView requestsListView;
+    @FXML private ListView<Request> requestsListView;
 
     @FXML private TextField httpRequestTextField;
     @FXML private ComboBox<String> httpReqComboBox;
