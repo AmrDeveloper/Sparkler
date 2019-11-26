@@ -4,12 +4,11 @@ import app.model.*;
 
 import app.net.HttpMethod;
 import app.sockets.SocketManager;
+import app.utils.Log;
 import app.utils.Language;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -91,7 +90,7 @@ public class MainController implements Initializable {
     private void socketConnectButtonAction(){
         String socketUrl = socketUrlTextField.getText().trim();
         if (socketUrl.isEmpty()) {
-            System.out.println("Invalid url");
+            Log.warn("Socket", "Invalid Socket Url");
             return;
         }
 
@@ -99,10 +98,12 @@ public class MainController implements Initializable {
             socketManager.disconnectSocket();
             socketUrlTextField.setEditable(true);
             socketConnectButton.setText("Connected");
+            Log.info("Socket", "Socket Connected");
         } else {
             socketManager.connectSocket(socketUrl, () -> {
                 socketUrlTextField.setEditable(false);
                 socketConnectButton.setText("Disconnected");
+                Log.info("Socket", "Socket Disconnected");
             });
         }
     }
