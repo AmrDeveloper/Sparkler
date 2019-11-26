@@ -1,5 +1,7 @@
-package app;
+package app.controllers;
 
+import app.model.Attribute;
+import app.model.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -21,10 +23,13 @@ public class MainController implements Initializable {
 
     @FXML private TabPane requestTabPane;
     @FXML private Tab requestParamsTab;
+    @FXML private ListView<Attribute> requestParamsListView;
     @FXML private Tab requestHeadersTab;
+    @FXML private ListView<Attribute> requestHeadersListView;
     @FXML private Tab requestBodyTab;
 
     @FXML private TabPane requestBodyTabPane;
+    @FXML private ListView<Attribute> requestBodyDataListView;
     @FXML private ComboBox<String> requestBodyRowComboBox;
     @FXML private Button requestBodyRowCopyButton;
     @FXML private Button requestBodyRowClearButton;
@@ -41,9 +46,10 @@ public class MainController implements Initializable {
     @FXML private TextField socketEmitKey;
     @FXML private TextField socketEmitValue;
     @FXML private Button socketEmitButton;
-    @FXML private ListView socketEventListView;
+    @FXML private ListView<Event> socketEventListView;
     @FXML private Button socketEventStartAll;
     @FXML private Button socketEventStopAll;
+    @FXML private Button socketEventAddListener;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
