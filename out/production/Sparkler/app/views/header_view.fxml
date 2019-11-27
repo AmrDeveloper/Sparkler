@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="responseHeaderLayout" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="responseHeaderKey" editable="false" layoutX="14.0" layoutY="14.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
+      <TextField fx:id="responseHeaderValue" editable="false" layoutX="196.0" layoutY="2.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
+   </children>
+</AnchorPane>

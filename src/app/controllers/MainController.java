@@ -2,18 +2,21 @@ package app.controllers;
 
 import app.model.*;
 
-import app.net.HttpMethod;
+import app.net.*;
 import app.sockets.SocketManager;
 import app.utils.ClipboardUtils;
 import app.utils.Log;
 import app.utils.Language;
 import app.utils.TextEditor;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -45,6 +48,7 @@ public class MainController implements Initializable {
     @FXML private TabPane responseTabPane;
     @FXML private Tab responseBodyTab;
     @FXML private Tab responseHeadersTab;
+    @FXML private ListView<Header> responseHeaderListView;
     @FXML private SwingNode responseBodyNode;
     @FXML private ComboBox<Language> responseBodyComboBox;
     @FXML private Button responseBodyCopyButton;
@@ -62,6 +66,7 @@ public class MainController implements Initializable {
 
     private TextEditor requestBodyEditor;
     private TextEditor responseBodyEditor;
+    private final HttpClient httpClient = new HttpClient();
     private final SocketManager mSocketManager = SocketManager.getInstance();
 
     @Override
@@ -73,11 +78,12 @@ public class MainController implements Initializable {
     }
 
     private void setupListViews(){
-        requestsListView.setCellFactory(studentListView -> new RequestListCell());
-        requestParamsListView.setCellFactory(studentListView -> new AttributeListCell());
-        requestHeadersListView .setCellFactory(studentListView -> new AttributeListCell());
-        requestBodyDataListView.setCellFactory(studentListView -> new AttributeListCell());
-        socketEventListView.setCellFactory(studentListView -> new EventListCell());
+        requestsListView.setCellFactory(list -> new RequestListCell());
+        requestParamsListView.setCellFactory(list -> new AttributeListCell());
+        requestHeadersListView .setCellFactory(list -> new AttributeListCell());
+        requestBodyDataListView.setCellFactory(list -> new AttributeListCell());
+        socketEventListView.setCellFactory(list -> new EventListCell());
+        responseHeaderListView.setCellFactory(list -> new HeaderListCell());
     }
 
     private void setupComboBoxes(){
@@ -96,6 +102,8 @@ public class MainController implements Initializable {
     }
 
     private void setupButtons() {
+        sendRequestButton.setOnMouseClicked(e -> makeHttpRequestButton());
+
         //Copy and clear actions
         requestBodyRowCopyButton.setOnMouseClicked(event -> ClipboardUtils.copyEditorText(requestBodyEditor));
         requestBodyRowClearButton.setOnMouseClicked(event -> requestBodyEditor.clearText());
@@ -115,6 +123,46 @@ public class MainController implements Initializable {
         responseBodyEditor = new TextEditor();
         responseBodyEditor.invoke(responseBodyNode);
         responseBodyEditor.setEditable(false);
+    }
+
+    private void makeHttpRequestButton(){
+        String requestUrl = httpRequestTextField.getText();
+        if (requestUrl.isEmpty()) {
+            //TODO : will show dialog later
+            return;
+        }
+
+        HttpRequest request = new HttpRequest(requestUrl, httpReqComboBox.getValue());
+        httpClient.makeHttpRequest(request, new OnHttpClientListener() {
+            @Override
+            public void onRequestFailure() {
+                Platform.runLater(() -> {
+                    statusLabel.setText("Status : 404");
+                });
+            }
+
+            @Override
+            public void onRequestSuccessful(HttpResponse response) {
+                Platform.runLater(() -> {
+                    String responseCode = String.valueOf(response.getResponseCode());
+                    statusLabel.setText("Status" + responseCode);
+
+                    String responseBody = response.getResponseBody();
+                    responseBodyEditor.setText(responseBody);
+                    responseBodyEditor.changeLanguageJSON();
+
+                    Map<String, List<String>> headers = response.getHeaders();
+                    for (String key : headers.keySet()) {
+                        List<String> values = headers.get(key);
+                        if (values.size() == 1) {
+                            responseHeaderListView.getItems().add(new Header(key, values.get(0)));
+                        } else {
+                            responseHeaderListView.getItems().add(new Header(key, values.toString()));
+                        }
+                    }
+                });
+            }
+        });
     }
 
     private void socketConnectButtonAction(){

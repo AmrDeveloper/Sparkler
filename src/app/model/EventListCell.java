@@ -35,6 +35,7 @@ public class EventListCell extends SparklerListCell<Event> {
                 Log.warn("EventCell", "Invalid Event Name");
                 return;
             }
+            event.setName(eventName);
             if (event.isListening()) {
                 listenerButton.setText("Start");
                 mSocketManager.stopSocketListener(eventName);

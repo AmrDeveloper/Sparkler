@@ -24,10 +24,6 @@ public class TextEditor extends SwingComponent {
 
     private void setupNewEditor() {
         mTextArea = new RSyntaxTextArea();
-        mTextArea.setBracketMatchingEnabled(true);
-        mTextArea.setCloseMarkupTags(true);
-        mTextArea.setCloseCurlyBraces(true);
-        mTextArea.setCodeFoldingEnabled(true);
         mTextScrollPane = new RTextScrollPane(mTextArea);
         JPanel jPanel = new JPanel(new BorderLayout());
         jPanel.add(mTextScrollPane);
@@ -81,21 +77,25 @@ public class TextEditor extends SwingComponent {
 
     public void changeLanguageJSON() {
         mTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JSON);
+        enableCodeSetup();
         mCurrentLanguage = Language.JSON;
     }
 
     public void changeLanguageXML() {
         mTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
+        enableCodeSetup();
         mCurrentLanguage = Language.XML;
     }
 
     public void changeLanguageHTML() {
         mTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_HTML);
+        enableCodeSetup();
         mCurrentLanguage = Language.HTML;
     }
 
     public void changeLanguageTEXT() {
         mTextArea.setSyntaxEditingStyle("");
+        disableCodeSetup();
         mCurrentLanguage = Language.TEXT;
     }
 
@@ -106,6 +106,20 @@ public class TextEditor extends SwingComponent {
 
     public Language getCurrentLanguage() {
         return mCurrentLanguage;
+    }
+
+    private void enableCodeSetup(){
+        mTextArea.setBracketMatchingEnabled(true);
+        mTextArea.setCloseMarkupTags(true);
+        mTextArea.setCloseCurlyBraces(true);
+        mTextArea.setCodeFoldingEnabled(true);
+    }
+
+    private void disableCodeSetup(){
+        mTextArea.setBracketMatchingEnabled(false);
+        mTextArea.setCloseMarkupTags(false);
+        mTextArea.setCloseCurlyBraces(false);
+        mTextArea.setCodeFoldingEnabled(false);
     }
 
     @Override
