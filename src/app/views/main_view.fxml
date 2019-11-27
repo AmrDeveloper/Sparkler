@@ -22,16 +22,12 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Close" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <MenuItem mnemonicParsing="false" text="Exit" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
+                        <MenuItem mnemonicParsing="false" text="Settings" />
                         <MenuItem mnemonicParsing="false" text="About" />
                     </items>
                 </Menu>
@@ -55,7 +51,7 @@
                                             <children>
                                                 <ComboBox fx:id="httpReqComboBox" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="85.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="15.0" />
                                                 <TextField fx:id="httpRequestTextField" layoutX="75.0" layoutY="14.0" prefHeight="25.0" prefWidth="440.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="15.0" />
-                                                <Button fx:id="sendRequestButton" layoutX="557.0" layoutY="14.0" mnemonicParsing="false" text="Button" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0" />
+                                                <Button fx:id="sendRequestButton" layoutX="557.0" layoutY="14.0" mnemonicParsing="false" text="Send" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0" />
                                                 <TabPane fx:id="requestTabPane" layoutX="10.0" layoutY="47.0" prefHeight="200.0" prefWidth="615.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="50.0">
                                                     <tabs>
                                                         <Tab fx:id="requestParamsTab" text="Params">
@@ -125,7 +121,7 @@
                                                                         <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                             <children>
                                                                                 <ComboBox fx:id="responseBodyComboBox" prefWidth="75.0" VBox.vgrow="ALWAYS" />
-                                                                                <Button fx:id="responseBodyCopyButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Copy" />
+                                                                                <Button fx:id="responseBodyCopyButton" accessibleRole="IMAGE_VIEW" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Copy" />
                                                                                 <Button fx:id="responseBodyClearButton" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Clear" VBox.vgrow="SOMETIMES" />
                                                                             </children>
                                                                         </VBox>
