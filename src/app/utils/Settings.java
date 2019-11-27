@@ -50,8 +50,8 @@ public class Settings {
         return mSettingsPreference.getInt(TIMEOUT, DEFAULT_TIMEOUT);
     }
 
-    public void setTheme(String theme) {
-        mSettingsPreference.put(THEME, theme);
+    public void setTheme(Theme theme) {
+        mSettingsPreference.put(THEME, theme.name());
     }
 
     public String getTheme() {
