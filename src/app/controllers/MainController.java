@@ -101,12 +101,12 @@ public class MainController implements Initializable {
             mSocketManager.disconnectSocket();
             socketUrlTextField.setEditable(true);
             socketConnectButton.setText("Connected");
-            Log.info("Socket", "Socket Connected");
+            Log.info("Socket", "Socket Disconnected");
         } else {
             mSocketManager.connectSocket(socketUrl, () -> {
                 socketUrlTextField.setEditable(false);
                 socketConnectButton.setText("Disconnected");
-                Log.info("Socket", "Socket Disconnected");
+                Log.info("Socket", "Socket Connected");
             });
         }
     }

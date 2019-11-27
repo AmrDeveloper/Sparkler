@@ -1,5 +1,6 @@
 package app.sockets;
 
+import io.socket.client.Ack;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 
