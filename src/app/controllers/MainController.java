@@ -6,6 +6,8 @@ import app.net.HttpMethod;
 import app.sockets.SocketManager;
 import app.utils.Log;
 import app.utils.Language;
+import app.utils.TextEditor;
+import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -35,12 +37,14 @@ public class MainController implements Initializable {
     @FXML private TabPane requestBodyTabPane;
     @FXML private ListView<Attribute> requestBodyDataListView;
     @FXML private ComboBox<Language> requestBodyRowComboBox;
+    @FXML private SwingNode requestBodyNode;
     @FXML private Button requestBodyRowCopyButton;
     @FXML private Button requestBodyRowClearButton;
 
     @FXML private TabPane responseTabPane;
     @FXML private Tab responseBodyTab;
     @FXML private Tab responseHeadersTab;
+    @FXML private SwingNode responseBodyNode;
     @FXML private ComboBox<Language> responseBodyComboBox;
     @FXML private Button responseBodyCopyButton;
     @FXML private Button responseBodyClearButton;
@@ -55,10 +59,13 @@ public class MainController implements Initializable {
     @FXML private Button socketEventStopAll;
     @FXML private Button socketEventAddListener;
 
+    private TextEditor requestBodyEditor;
+    private TextEditor responseBodyEditor;
     private final SocketManager mSocketManager = SocketManager.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setupEditors();
         setupListViews();
         setupComboBoxes();
         setupButtons();
@@ -88,6 +95,15 @@ public class MainController implements Initializable {
         socketConnectButton.setOnMouseClicked(event -> socketConnectButtonAction());
         socketEmitButton.setOnMouseClicked(event -> socketEmitButtonAction());
         socketEventAddListener.setOnMouseClicked(event -> addEventSocketButton());
+    }
+
+    private void setupEditors() {
+        requestBodyEditor = new TextEditor();
+        requestBodyEditor.invoke(requestBodyNode);
+
+        responseBodyEditor = new TextEditor();
+        responseBodyEditor.invoke(responseBodyNode);
+        responseBodyEditor.setEditable(false);
     }
 
     private void socketConnectButtonAction(){

@@ -99,7 +99,7 @@
                                                                                                         <Button fx:id="requestBodyRowClearButton" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Clear" VBox.vgrow="SOMETIMES" />
                                                                                                     </children>
                                                                                                 </VBox>
-                                                                                                <SwingNode AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="0.0" />
+                                                                                                <SwingNode fx:id="requestBodyNode" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="0.0" />
                                                                                             </children>
                                                                                         </AnchorPane>
                                                                                     </content>
@@ -121,7 +121,7 @@
                                                             <content>
                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                                     <children>
-                                                                        <SwingNode AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="0.0" />
+                                                                        <SwingNode fx:id="responseBodyNode" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="0.0" />
                                                                         <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                             <children>
                                                                                 <ComboBox fx:id="responseBodyComboBox" prefWidth="75.0" VBox.vgrow="ALWAYS" />
