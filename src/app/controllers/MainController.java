@@ -7,6 +7,8 @@ import app.sockets.SocketManager;
 import app.utils.Log;
 import app.utils.Language;
 import app.utils.TextEditor;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -85,9 +87,13 @@ public class MainController implements Initializable {
 
         requestBodyRowComboBox.getItems().setAll(Language.values());
         requestBodyRowComboBox.getSelectionModel().select(0);
+        requestBodyRowComboBox.getSelectionModel()
+                .selectedItemProperty().addListener((observable, oldValue, newValue) -> requestBodyEditor.changeLanguage(newValue));
 
         responseBodyComboBox.getItems().setAll(Language.values());
         responseBodyComboBox.getSelectionModel().select(0);
+        responseBodyComboBox.getSelectionModel()
+                .selectedItemProperty().addListener((observable, oldValue, newValue) -> responseBodyEditor.changeLanguage(newValue));
     }
 
     private void setupButtons(){

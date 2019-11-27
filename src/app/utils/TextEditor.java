@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
 
-public class TextEditor extends SwingComponent{
+public class TextEditor extends SwingComponent {
 
     private RSyntaxTextArea mTextArea;
     private RTextScrollPane mTextScrollPane;
@@ -33,7 +33,7 @@ public class TextEditor extends SwingComponent{
         jPanel.add(mTextScrollPane);
     }
 
-    public RSyntaxTextArea getTextArea(){
+    public RSyntaxTextArea getTextArea() {
         return mTextArea;
     }
 
@@ -54,8 +54,29 @@ public class TextEditor extends SwingComponent{
         mTextArea.setText("");
     }
 
-    public void setEditable(boolean isEditable){
+    public void setEditable(boolean isEditable) {
         mTextArea.setEditable(isEditable);
+    }
+
+    public void changeLanguage(Language language) {
+        switch (language) {
+            case JSON: {
+                changeLanguageJSON();
+                break;
+            }
+            case HTML: {
+                changeLanguageHTML();
+                break;
+            }
+            case XML: {
+                changeLanguageXML();
+                break;
+            }
+            case TEXT: {
+                changeLanguageTEXT();
+                break;
+            }
+        }
     }
 
     public void changeLanguageJSON() {
