@@ -51,8 +51,8 @@ public class SocketManager {
         mSocket.on(event, objects -> listener.onEventSuccess());
     }
 
-    public void stopSocketListener(String event, SocketListener listener) {
-        mSocket.off(event, objects -> listener.onEventSuccess());
+    public void stopSocketListener(String event) {
+        mSocket.off(event);
     }
 
     public void disconnectSocket() {

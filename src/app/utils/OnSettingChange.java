@@ -4,6 +4,6 @@ public interface OnSettingChange {
 
     public void onTimeoutChange(int timeout);
 
-    public void onThemeChange(String theme);
+    public void onThemeChange(Theme theme);
 
 }

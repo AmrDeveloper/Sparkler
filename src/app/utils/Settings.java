@@ -12,7 +12,7 @@ public class Settings {
     private static final int DEFAULT_TIMEOUT = 10_000;
 
     private static final String THEME = "theme";
-    private static final String DEFAULT_THEME = "WHITE";
+    private static final Theme DEFAULT_THEME = Theme.WHITE;
 
     private OnSettingChange mOnSettingChange;
 
@@ -28,7 +28,7 @@ public class Settings {
                     mOnSettingChange.onTimeoutChange(Integer.parseInt(event.getNewValue()));
                     break;
                 case THEME :
-                    mOnSettingChange.onThemeChange(event.getNewValue());
+                    mOnSettingChange.onThemeChange(Theme.valueOf(event.getNewValue()));
                     break;
             }
         });
@@ -55,6 +55,6 @@ public class Settings {
     }
 
     public String getTheme() {
-        return mSettingsPreference.get(THEME, DEFAULT_THEME);
+        return mSettingsPreference.get(THEME, DEFAULT_THEME.name());
     }
 }
