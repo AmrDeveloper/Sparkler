@@ -95,12 +95,12 @@ public class MainController implements Initializable {
                 .selectedItemProperty().addListener((observable, oldValue, newValue) -> responseBodyEditor.changeLanguage(newValue));
     }
 
-    private void setupButtons(){
+    private void setupButtons() {
         //Copy and clear actions
-        requestBodyRowCopyButton.setOnMouseClicked(event -> requestBodyRowCopyAction());
-        requestBodyRowClearButton.setOnMouseClicked(event -> requestBodyRowClearAction());
-        responseBodyCopyButton.setOnMouseClicked(event -> responseBodyCopyAction());
-        responseBodyClearButton.setOnMouseClicked(event -> responseBodyClearAction());
+        requestBodyRowCopyButton.setOnMouseClicked(event -> ClipboardUtils.copyEditorText(requestBodyEditor));
+        requestBodyRowClearButton.setOnMouseClicked(event -> requestBodyEditor.clearText());
+        responseBodyCopyButton.setOnMouseClicked(event -> ClipboardUtils.copyEditorText(responseBodyEditor));
+        responseBodyClearButton.setOnMouseClicked(event -> responseBodyEditor.clearText());
 
         //Socket Views
         socketConnectButton.setOnMouseClicked(event -> socketConnectButtonAction());
@@ -157,23 +157,5 @@ public class MainController implements Initializable {
 
     private void addEventSocketButton(){
         socketEventListView.getItems().add(new Event("",0,false));
-    }
-
-    private void requestBodyRowCopyAction(){
-        String text = requestBodyEditor.getText().trim();
-        ClipboardUtils.copyText(text);
-    }
-
-    private void requestBodyRowClearAction(){
-        requestBodyEditor.clearText();
-    }
-
-    private void responseBodyCopyAction() {
-        String text = responseBodyEditor.getText().trim();
-        ClipboardUtils.copyText(text);
-    }
-
-    private void responseBodyClearAction(){
-        responseBodyEditor.clearText();
     }
 }
