@@ -55,7 +55,7 @@ public class MainController implements Initializable {
     @FXML private Button socketEventStopAll;
     @FXML private Button socketEventAddListener;
 
-    private final SocketManager socketManager = SocketManager.getInstance();
+    private final SocketManager mSocketManager = SocketManager.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -84,7 +84,10 @@ public class MainController implements Initializable {
     }
 
     private void setupButtons(){
+        //Socket Views
         socketConnectButton.setOnMouseClicked(event -> socketConnectButtonAction());
+        socketEmitButton.setOnMouseClicked(event -> socketEmitButtonAction());
+        socketEventAddListener.setOnMouseClicked(event -> addEventSocketButton());
     }
 
     private void socketConnectButtonAction(){
@@ -94,17 +97,38 @@ public class MainController implements Initializable {
             return;
         }
 
-        if (socketManager.isSocketConnected()) {
-            socketManager.disconnectSocket();
+        if (mSocketManager.isSocketConnected()) {
+            mSocketManager.disconnectSocket();
             socketUrlTextField.setEditable(true);
             socketConnectButton.setText("Connected");
             Log.info("Socket", "Socket Connected");
         } else {
-            socketManager.connectSocket(socketUrl, () -> {
+            mSocketManager.connectSocket(socketUrl, () -> {
                 socketUrlTextField.setEditable(false);
                 socketConnectButton.setText("Disconnected");
                 Log.info("Socket", "Socket Disconnected");
             });
         }
+    }
+
+    private void socketEmitButtonAction(){
+        if(!mSocketManager.isSocketConnected()){
+            Log.warn("Socket","Not Socket Connected");
+            return;
+        }
+
+        String key = socketEmitKey.getText().trim();
+        String value = socketEmitValue.getText().trim();
+
+        if(key.isEmpty() || value.isEmpty()){
+            Log.warn("Socket","Invalid Socket key or value");
+            return;
+        }
+
+        mSocketManager.emitValue(key, value);
+    }
+
+    private void addEventSocketButton(){
+        socketEventListView.getItems().add(new Event("",0,false));
     }
 }
