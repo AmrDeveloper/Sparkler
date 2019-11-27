@@ -1,5 +1,6 @@
 package app.net;
 
+import app.editor.Language;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -41,7 +42,15 @@ public class HttpClient {
                 String responseBody = response.body().string();
                 Map<String, List<String>> headersMap = response.headers().toMultimap();
                 String contentType = Objects.requireNonNull(response.header("Content-Type")).split(";")[0];
-                HttpResponse httpResponse = new HttpResponse(responseCode, responseBody, contentType, headersMap);
+                Language contentLanguage = Language.TEXT;
+                if(contentType.contains("json")){
+                    contentLanguage = Language.JSON;
+                }else if(contentType.contains("html")){
+                    contentLanguage = Language.HTML;
+                }else if(contentType.contains("xml")){
+                    contentLanguage = Language.XML;
+                }
+                HttpResponse httpResponse = new HttpResponse(responseCode, responseBody, contentLanguage, headersMap);
                 listener.onRequestSuccessful(httpResponse);
             }
         });

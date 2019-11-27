@@ -1,11 +1,13 @@
 package app.model;
 
+import app.net.HttpMethod;
+
 public class Request {
 
     private String url;
-    private String method;
+    private HttpMethod method;
 
-    public Request(String url, String method) {
+    public Request(String url, HttpMethod method) {
         this.url = url;
         this.method = method;
     }
@@ -14,7 +16,7 @@ public class Request {
         return url;
     }
 
-    public String getMethod() {
+    public HttpMethod getMethod() {
         return method;
     }
 

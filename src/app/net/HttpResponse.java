@@ -1,5 +1,7 @@
 package app.net;
 
+import app.editor.Language;
+
 import java.util.List;
 import java.util.Map;
 
@@ -7,11 +9,11 @@ public class HttpResponse {
 
     private int responseCode;
     private String responseBody;
-    private String contentType;
+    private Language contentType;
     private Map<String, List<String>> headers;
 
     public HttpResponse(int responseCode, String responseBody,
-                        String contentType,
+                        Language contentType,
                         Map<String, List<String>> headers) {
         this.responseCode = responseCode;
         this.responseBody = responseBody;
@@ -35,11 +37,11 @@ public class HttpResponse {
         this.responseBody = responseBody;
     }
 
-    public String getContentType() {
+    public Language getContentType() {
         return contentType;
     }
 
-    public void setContentType(String contentType) {
+    public void setContentType(Language contentType) {
         this.contentType = contentType;
     }
 

@@ -1,5 +1,6 @@
-package app.utils;
+package app.editor;
 
+import app.utils.SwingComponent;
 import javafx.embed.swing.SwingNode;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;

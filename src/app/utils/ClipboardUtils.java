@@ -1,5 +1,7 @@
 package app.utils;
 
+import app.editor.TextEditor;
+
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;

@@ -6,8 +6,8 @@ import app.net.*;
 import app.sockets.SocketManager;
 import app.utils.ClipboardUtils;
 import app.utils.Log;
-import app.utils.Language;
-import app.utils.TextEditor;
+import app.editor.Language;
+import app.editor.TextEditor;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
@@ -84,6 +84,8 @@ public class MainController implements Initializable {
         requestBodyDataListView.setCellFactory(list -> new AttributeListCell());
         socketEventListView.setCellFactory(list -> new EventListCell());
         responseHeaderListView.setCellFactory(list -> new HeaderListCell());
+
+        requestsListView.setOnMouseClicked(e -> onHistoryListClickAction());
     }
 
     private void setupComboBoxes(){
@@ -125,6 +127,15 @@ public class MainController implements Initializable {
         responseBodyEditor.setEditable(false);
     }
 
+    private void onHistoryListClickAction() {
+        Request currentRequest = requestsListView.getSelectionModel().getSelectedItem();
+        if (currentRequest == null) {
+            return;
+        }
+        httpRequestTextField.setText(currentRequest.getUrl());
+        httpReqComboBox.getSelectionModel().select(currentRequest.getMethod());
+    }
+
     private void makeHttpRequestButton(){
         String requestUrl = httpRequestTextField.getText();
         if (requestUrl.isEmpty()) {
@@ -144,25 +155,39 @@ public class MainController implements Initializable {
             @Override
             public void onRequestSuccessful(HttpResponse response) {
                 Platform.runLater(() -> {
+                    //Update response Code
                     String responseCode = String.valueOf(response.getResponseCode());
                     statusLabel.setText("Status" + responseCode);
 
+                    //Update Response Body
                     String responseBody = response.getResponseBody();
-                    responseBodyEditor.setText(responseBody);
-                    responseBodyEditor.changeLanguageJSON();
+                    responseBodyEditor.changeLanguage(response.getContentType());
+                    responseBodyEditor.setFormattedText(responseBody);
 
+                    //Update headers
                     Map<String, List<String>> headers = response.getHeaders();
-                    for (String key : headers.keySet()) {
-                        List<String> values = headers.get(key);
-                        if (values.size() == 1) {
-                            responseHeaderListView.getItems().add(new Header(key, values.get(0)));
-                        } else {
-                            responseHeaderListView.getItems().add(new Header(key, values.toString()));
-                        }
-                    }
+                    bindHeaderListView(headers);
+
+                    //Update Language
+                    responseBodyComboBox.getSelectionModel().select(response.getContentType());
+
+                    //Insert this request to history
+                    Request history = new Request(request.getRequestUrl(), request.getRequestMethod());
+                    requestsListView.getItems().add(history);
                 });
             }
         });
+    }
+
+    private void bindHeaderListView(Map<String, List<String>> headers){
+        for (String key : headers.keySet()) {
+            List<String> values = headers.get(key);
+            if (values.size() == 1) {
+                responseHeaderListView.getItems().add(new Header(key, values.get(0)));
+            } else {
+                responseHeaderListView.getItems().add(new Header(key, values.toString()));
+            }
+        }
     }
 
     private void socketConnectButtonAction(){

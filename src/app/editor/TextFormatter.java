@@ -1,4 +1,4 @@
-package app.utils;
+package app.editor;
 
 public class TextFormatter {
 
@@ -29,6 +29,7 @@ public class TextFormatter {
     }
 
     private String formatJSON(String text) {
-        return text;
+        JsonFormatter formatter = new JsonFormatter();
+        return formatter.format(text);
     }
 }

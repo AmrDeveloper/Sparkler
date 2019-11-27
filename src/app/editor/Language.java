@@ -1,4 +1,4 @@
-package app.utils;
+package app.editor;
 
 public enum Language {
     TEXT,
