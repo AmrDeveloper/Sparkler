@@ -4,11 +4,10 @@ import app.model.*;
 
 import app.net.HttpMethod;
 import app.sockets.SocketManager;
+import app.utils.ClipboardUtils;
 import app.utils.Log;
 import app.utils.Language;
 import app.utils.TextEditor;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -97,6 +96,12 @@ public class MainController implements Initializable {
     }
 
     private void setupButtons(){
+        //Copy and clear actions
+        requestBodyRowCopyButton.setOnMouseClicked(event -> requestBodyRowCopyAction());
+        requestBodyRowClearButton.setOnMouseClicked(event -> requestBodyRowClearAction());
+        responseBodyCopyButton.setOnMouseClicked(event -> responseBodyCopyAction());
+        responseBodyClearButton.setOnMouseClicked(event -> responseBodyClearAction());
+
         //Socket Views
         socketConnectButton.setOnMouseClicked(event -> socketConnectButtonAction());
         socketEmitButton.setOnMouseClicked(event -> socketEmitButtonAction());
@@ -152,5 +157,23 @@ public class MainController implements Initializable {
 
     private void addEventSocketButton(){
         socketEventListView.getItems().add(new Event("",0,false));
+    }
+
+    private void requestBodyRowCopyAction(){
+        String text = requestBodyEditor.getText().trim();
+        ClipboardUtils.copyText(text);
+    }
+
+    private void requestBodyRowClearAction(){
+        requestBodyEditor.clearText();
+    }
+
+    private void responseBodyCopyAction() {
+        String text = responseBodyEditor.getText().trim();
+        ClipboardUtils.copyText(text);
+    }
+
+    private void responseBodyClearAction(){
+        responseBodyEditor.clearText();
     }
 }
