@@ -88,8 +88,22 @@ public class HttpClient {
         }else{
             //Bind Body Text
             String bodyTxt = request.getRequestBody();
-            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-            requestBody = RequestBody.create(JSON,bodyTxt);
+            MediaType mediaType;
+            switch (request.getBodyContentType()){
+                case JSON:
+                    mediaType = MediaType.parse("application/json; charset=utf-8");
+                    break;
+                case XML:
+                    mediaType = MediaType.parse("application/xml; charset=utf-8");
+                    break;
+                case HTML:
+                    mediaType = MediaType.parse("text/html");
+                    break;
+                default:
+                    mediaType = MediaType.parse("text/plain");
+                    break;
+            }
+            requestBody = RequestBody.create(mediaType, bodyTxt);
         }
 
         switch (request.getRequestMethod()) {

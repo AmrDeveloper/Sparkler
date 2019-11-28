@@ -13,11 +13,9 @@ import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
 
 import java.net.URL;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class MainController implements Initializable {
 
@@ -224,6 +222,10 @@ public class MainController implements Initializable {
         if(requestBodyText != null && !requestBodyText.isEmpty()){
             request.setRequestBody(requestBodyText);
         }
+
+        //Set body content type
+        Language bodyLanguage = requestBodyRowComboBox.getValue();
+        request.setBodyContentType(bodyLanguage);
 
         httpClient.makeHttpRequest(request, new OnHttpClientListener() {
             @Override

@@ -1,5 +1,7 @@
 package app.net;
 
+import app.editor.Language;
+
 import java.util.Map;
 
 public class HttpRequest {
@@ -9,18 +11,19 @@ public class HttpRequest {
     private Map<String, String> requestBodyMap;
     private Map<String, String> requestHeadersMap;
     private String requestBody;
-    private String bodyContentType;
+    private Language bodyContentType;
     private HttpMethod requestMethod;
 
     public HttpRequest(String requestUrl, HttpMethod method){
         this.requestUrl = requestUrl;
         this.requestMethod = method;
+        this.bodyContentType = Language.TEXT;
     }
 
     public HttpRequest(String requestUrl, Map<String, String> requestParams,
                        Map<String, String> requestBodyMap,
                        Map<String, String> requestHeadersMap,
-                       String requestBody, String bodyContentType,
+                       String requestBody, Language bodyContentType,
                        HttpMethod requestMethod) {
         this.requestUrl = requestUrl;
         this.requestParams = requestParams;
@@ -51,7 +54,7 @@ public class HttpRequest {
         this.requestBody = requestBody;
     }
 
-    public void setBodyContentType(String bodyContentType) {
+    public void setBodyContentType(Language bodyContentType) {
         this.bodyContentType = bodyContentType;
     }
 
@@ -79,7 +82,7 @@ public class HttpRequest {
         return requestBody;
     }
 
-    public String getBodyContentType() {
+    public Language getBodyContentType() {
         return bodyContentType;
     }
 
