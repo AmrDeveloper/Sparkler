@@ -205,14 +205,19 @@ public class MainController implements Initializable {
 
         HttpRequest request = new HttpRequest(requestUrl, httpReqComboBox.getValue());
 
-        boolean isParamsEmpty = requestParamsListView.getItems().isEmpty();
-        if (!isParamsEmpty) {
+        boolean isParamsListEmpty = requestParamsListView.getItems().isEmpty();
+        if (!isParamsListEmpty) {
             parseRequestParams(request);
         }
 
-        boolean isHeadersEmpty = requestHeadersListView.getItems().isEmpty();
-        if(!isHeadersEmpty){
+        boolean isHeadersListEmpty = requestHeadersListView.getItems().isEmpty();
+        if(!isHeadersListEmpty){
             parseRequestHeaders(request);
+        }
+
+        boolean isBodyListEmpty = requestBodyDataListView.getItems().isEmpty();
+        if(!isBodyListEmpty){
+            parseRequestBody(request);
         }
 
         httpClient.makeHttpRequest(request, new OnHttpClientListener() {
@@ -271,18 +276,34 @@ public class MainController implements Initializable {
     }
 
     private void parseRequestHeaders(HttpRequest request){
-        List<Attribute> paramsList = new ArrayList<>(requestHeadersListView.getItems());
-        Map<String, String> paramsMap = new HashMap<>(paramsList.size());
-        for (Attribute attribute : paramsList) {
+        List<Attribute> headerList = new ArrayList<>(requestHeadersListView.getItems());
+        Map<String, String> headerMap = new HashMap<>(headerList.size());
+        for (Attribute attribute : headerList) {
             if (attribute.getKey().isEmpty() ||
                     attribute.getValue().isEmpty() ||
                     !attribute.isUserChoice()) {
                 continue;
             }
-            paramsMap.putIfAbsent(attribute.getKey(), attribute.getValue());
+            headerMap.putIfAbsent(attribute.getKey(), attribute.getValue());
         }
-        if (!paramsMap.isEmpty()) {
-            request.setRequestHeaders(paramsMap);
+        if (!headerMap.isEmpty()) {
+            request.setRequestHeaders(headerMap);
+        }
+    }
+
+    private void parseRequestBody(HttpRequest request){
+        List<Attribute> bodyList = new ArrayList<>(requestBodyDataListView.getItems());
+        Map<String, String> bodyMap = new HashMap<>(bodyList.size());
+        for (Attribute attribute : bodyList) {
+            if (attribute.getKey().isEmpty() ||
+                    attribute.getValue().isEmpty() ||
+                    !attribute.isUserChoice()) {
+                continue;
+            }
+            bodyMap.putIfAbsent(attribute.getKey(), attribute.getValue());
+        }
+        if (!bodyMap.isEmpty()) {
+            request.setRequestBodyMap(bodyMap);
         }
     }
 
