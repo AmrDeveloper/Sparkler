@@ -220,6 +220,11 @@ public class MainController implements Initializable {
             parseRequestBody(request);
         }
 
+        String requestBodyText = requestBodyEditor.getText();
+        if(requestBodyText != null && !requestBodyText.isEmpty()){
+            request.setRequestBody(requestBodyText);
+        }
+
         httpClient.makeHttpRequest(request, new OnHttpClientListener() {
             @Override
             public void onRequestFailure() {

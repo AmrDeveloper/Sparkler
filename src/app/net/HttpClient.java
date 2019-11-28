@@ -65,6 +65,7 @@ public class HttpClient {
     private Request createHttpClientRequest(HttpRequest request) {
         Request.Builder requestBuilder = new Request.Builder();
 
+
         if (request.getRequestParams() != null) {
             //Bind Parameters
             String requestUrl = bindQueryParameter(request.getRequestUrl(), request.getRequestParams());
@@ -80,11 +81,17 @@ public class HttpClient {
             requestBuilder = bindRequestHeaders(requestBuilder, request.getRequestHeadersMap());
         }
 
-        RequestBody requestBody = RequestBody.create(null, new byte[]{});
+        RequestBody requestBody;
         if (request.getRequestBodyMap() != null) {
-            //Bind Body
+            //Bind Body Map
             requestBody = bindRequestBody(request.getRequestBodyMap());
+        }else{
+            //Bind Body Text
+            String bodyTxt = request.getRequestBody();
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            requestBody = RequestBody.create(JSON,bodyTxt);
         }
+
         switch (request.getRequestMethod()) {
             case GET:
                 requestBuilder = requestBuilder.get();
@@ -102,6 +109,7 @@ public class HttpClient {
                 requestBuilder = requestBuilder.delete(requestBody);
                 break;
         }
+
         return requestBuilder.build();
     }
 
