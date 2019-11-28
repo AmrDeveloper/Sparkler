@@ -13,6 +13,7 @@ import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 
 import java.net.URL;
 import java.util.List;
@@ -86,7 +87,7 @@ public class MainController implements Initializable {
         responseHeaderListView.setCellFactory(list -> new HeaderListCell());
 
         requestsListView.setOnMouseClicked(e -> onHistoryListClickAction());
-        requestParamsListView.getItems().add(new Attribute("",""));
+        setupRequestParamsListView();
     }
 
     private void setupComboBoxes(){
@@ -126,6 +127,25 @@ public class MainController implements Initializable {
         responseBodyEditor = new TextEditor();
         responseBodyEditor.invoke(responseBodyNode);
         responseBodyEditor.setEditable(false);
+    }
+
+    private void setupRequestParamsListView(){
+        requestParamsListView.getItems().add(new Attribute("", ""));
+        requestParamsListView.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case ENTER: {
+                    requestParamsListView.getItems().add(new Attribute("", ""));
+                    break;
+                }
+                case DELETE: {
+                    int selectedIndex = requestParamsListView.getSelectionModel().getSelectedIndex();
+                    if (selectedIndex != -1) {
+                        requestParamsListView.getItems().remove(selectedIndex);
+                    }
+                    break;
+                }
+            }
+        });
     }
 
     private void onHistoryListClickAction() {
