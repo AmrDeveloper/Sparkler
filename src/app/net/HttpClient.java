@@ -80,35 +80,28 @@ public class HttpClient {
             requestBuilder = bindRequestHeaders(requestBuilder, request.getRequestHeadersMap());
         }
 
+        RequestBody requestBody = RequestBody.create(null, new byte[]{});
         if (request.getRequestBodyMap() != null) {
             //Bind Body
-            RequestBody requestBody = bindRequestBody(request.getRequestBodyMap());
-            switch (request.getRequestMethod()) {
-                case POST:
-                    requestBuilder = requestBuilder.post(requestBody);
-                    break;
-                case PUT:
-                    requestBuilder = requestBuilder.put(requestBody);
-                    break;
-                case PATCH:
-                    requestBuilder = requestBuilder.patch(requestBody);
-                    break;
-                case DELETE:
-                    requestBuilder = requestBuilder.delete(requestBody);
-                    break;
-            }
-
-        } else {
-            switch (request.getRequestMethod()) {
-                case GET:
-                    requestBuilder = requestBuilder.get();
-                    break;
-                case DELETE:
-                    requestBuilder = requestBuilder.delete();
-                    break;
-            }
+            requestBody = bindRequestBody(request.getRequestBodyMap());
         }
-
+        switch (request.getRequestMethod()) {
+            case GET:
+                requestBuilder = requestBuilder.get();
+                break;
+            case POST:
+                requestBuilder = requestBuilder.post(requestBody);
+                break;
+            case PUT:
+                requestBuilder = requestBuilder.put(requestBody);
+                break;
+            case PATCH:
+                requestBuilder = requestBuilder.patch(requestBody);
+                break;
+            case DELETE:
+                requestBuilder = requestBuilder.delete(requestBody);
+                break;
+        }
         return requestBuilder.build();
     }
 
