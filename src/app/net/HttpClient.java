@@ -2,6 +2,8 @@ package app.net;
 
 import app.editor.Language;
 import app.utils.Log;
+import app.utils.OnTimeoutChangeListener;
+import app.utils.Settings;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -12,21 +14,30 @@ import java.util.concurrent.TimeUnit;
 
 public class HttpClient {
 
-    private int connectTimeout = 10;
-    private int writeTimeout = 10;
-    private int readTimeout = 30;
-    private final OkHttpClient mHttpClient;
+    private int connectTimeout = 10_000;
+    private int writeTimeout = 30_000;
+    private int readTimeout = 30_000;
+    private OkHttpClient mHttpClient;
+    private final Settings settings = new Settings();
 
     public HttpClient() {
+        updateTimeoutFromPref();
         this.mHttpClient = initHttpClient();
     }
 
     private OkHttpClient initHttpClient() {
         return new OkHttpClient.Builder()
-                .connectTimeout(connectTimeout, TimeUnit.SECONDS)
-                .writeTimeout(writeTimeout, TimeUnit.SECONDS)
-                .readTimeout(readTimeout, TimeUnit.SECONDS)
+                .connectTimeout(connectTimeout, TimeUnit.MILLISECONDS)
+                .writeTimeout(writeTimeout, TimeUnit.MILLISECONDS)
+                .readTimeout(readTimeout, TimeUnit.MILLISECONDS)
                 .build();
+    }
+
+    private void updateTimeoutFromPref(){
+        this.connectTimeout = settings.getConnectTimeout();
+        this.readTimeout = settings.getReadTimeout();
+        this.writeTimeout = settings.getWriteTimeout();
+        this.settings.setOnTimeoutChange(onTimeoutChangeListener);
     }
 
     public void makeHttpRequest(HttpRequest request, OnHttpClientListener listener) {
@@ -148,4 +159,24 @@ public class HttpClient {
         }
         return formBody.build();
     }
+
+    private OnTimeoutChangeListener onTimeoutChangeListener = new OnTimeoutChangeListener() {
+        @Override
+        public void onConnectTimeChange(int time) {
+            connectTimeout = time;
+            mHttpClient = initHttpClient();
+        }
+
+        @Override
+        public void onReadTimeChange(int time) {
+            readTimeout = time;
+            mHttpClient = initHttpClient();
+        }
+
+        @Override
+        public void onWriteTimeChange(int time) {
+            writeTimeout = time;
+            mHttpClient = initHttpClient();
+        }
+    };
 }

@@ -8,28 +8,43 @@ public class Settings {
 
     private static final String SETTINGS = "settings";
 
-    private static final String TIMEOUT = "timeout";
-    private static final int DEFAULT_TIMEOUT = 10_000;
+    private static final String CONNECT_TIMEOUT = "connect_timeout";
+    private static final String READ_TIMEOUT = "read_timeout";
+    private static final String WRITE_TIMEOUT = "write_timeout";
+
+    private static final int DEFAULT_CONNECT_TIMEOUT = 10_000;
+    private static final int DEFAULT_READ_TIMEOUT = 10_000;
+    private static final int DEFAULT_WRITE_TIMEOUT = 30_000;
 
     private static final String THEME = "theme";
     private static final Theme DEFAULT_THEME = Theme.WHITE;
 
-    private OnSettingChange mOnSettingChange;
+    private OnThemeChangeListener mOnThemeChangeListener;
+    private OnTimeoutChangeListener mOnTimeoutChangeListener;
 
     public Settings() {
         mSettingsPreference = Preferences.userRoot().node(SETTINGS);
         mSettingsPreference.addPreferenceChangeListener(event -> {
-            if(mOnSettingChange == null){
-                return;
-            }
-            String key = event.getKey();
-            switch (key){
-                case TIMEOUT :
-                    mOnSettingChange.onTimeoutChange(Integer.parseInt(event.getNewValue()));
-                    break;
-                case THEME :
-                    mOnSettingChange.onThemeChange(Theme.valueOf(event.getNewValue()));
-                    break;
+            if(event.getKey().equals(THEME)){
+                if(mOnThemeChangeListener == null){
+                    return;
+                }
+                mOnThemeChangeListener.onThemeChange(Theme.valueOf(event.getNewValue()));
+            }else{
+                if(mOnTimeoutChangeListener == null){
+                    return;
+                }
+                switch (event.getKey()){
+                    case CONNECT_TIMEOUT:
+                        mOnTimeoutChangeListener.onConnectTimeChange(Integer.parseInt(event.getNewValue()));
+                        break;
+                    case READ_TIMEOUT:
+                        mOnTimeoutChangeListener.onReadTimeChange(Integer.parseInt(event.getNewValue()));
+                        break;
+                    case WRITE_TIMEOUT:
+                        mOnTimeoutChangeListener.onWriteTimeChange(Integer.parseInt(event.getNewValue()));
+                        break;
+                }
             }
         });
     }
@@ -38,16 +53,36 @@ public class Settings {
         return mSettingsPreference;
     }
 
-    public void setOnSettingChange(OnSettingChange listener){
-        mOnSettingChange = listener;
+    public void setOnSettingChange(OnThemeChangeListener listener){
+        mOnThemeChangeListener = listener;
     }
 
-    public void setTimeout(int timeout) {
-        mSettingsPreference.putInt(TIMEOUT, timeout);
+    public void setOnTimeoutChange(OnTimeoutChangeListener listener){
+        mOnTimeoutChangeListener = listener;
     }
 
-    public int getTimeout() {
-        return mSettingsPreference.getInt(TIMEOUT, DEFAULT_TIMEOUT);
+    public void setConnectTimeout(int timeout) {
+        mSettingsPreference.putInt(CONNECT_TIMEOUT, timeout);
+    }
+
+    public int getConnectTimeout() {
+        return mSettingsPreference.getInt(CONNECT_TIMEOUT, DEFAULT_CONNECT_TIMEOUT);
+    }
+
+    public void setReadTimeout(int timeout) {
+        mSettingsPreference.putInt(READ_TIMEOUT, timeout);
+    }
+
+    public int getReadTimeout() {
+        return mSettingsPreference.getInt(READ_TIMEOUT, DEFAULT_READ_TIMEOUT);
+    }
+
+    public void setWriteTimeout(int timeout) {
+        mSettingsPreference.putInt(WRITE_TIMEOUT, timeout);
+    }
+
+    public int getWriteTimeout() {
+        return mSettingsPreference.getInt(WRITE_TIMEOUT, DEFAULT_WRITE_TIMEOUT);
     }
 
     public void setTheme(Theme theme) {
