@@ -67,9 +67,9 @@ public class HttpClient {
         if (request.getRequestParams() != null) {
             //Bind Parameters
             String requestUrl = bindQueryParameter(request.getRequestUrl(), request.getRequestParams());
-            requestBuilder.url(requestUrl);
+            requestBuilder = requestBuilder.url(requestUrl);
         } else {
-            requestBuilder.url(request.getRequestUrl());
+            requestBuilder = requestBuilder.url(request.getRequestUrl());
         }
 
         if (request.getRequestHeadersMap() != null) {

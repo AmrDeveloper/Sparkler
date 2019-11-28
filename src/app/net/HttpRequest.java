@@ -31,6 +31,34 @@ public class HttpRequest {
         this.requestMethod = requestMethod;
     }
 
+    public void setRequestUrl(String requestUrl) {
+        this.requestUrl = requestUrl;
+    }
+
+    public void setRequestParams(Map<String, String> requestParams) {
+        this.requestParams = requestParams;
+    }
+
+    public void setRequestBodyMap(Map<String, String> requestBodyMap) {
+        this.requestBodyMap = requestBodyMap;
+    }
+
+    public void setRequestHeadersMap(Map<String, String> requestHeadersMap) {
+        this.requestHeadersMap = requestHeadersMap;
+    }
+
+    public void setRequestBody(String requestBody) {
+        this.requestBody = requestBody;
+    }
+
+    public void setBodyContentType(String bodyContentType) {
+        this.bodyContentType = bodyContentType;
+    }
+
+    public void setRequestMethod(HttpMethod requestMethod) {
+        this.requestMethod = requestMethod;
+    }
+
     public String getRequestUrl() {
         return requestUrl;
     }

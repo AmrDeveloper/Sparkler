@@ -16,9 +16,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class MainController implements Initializable {
 
@@ -205,6 +204,12 @@ public class MainController implements Initializable {
         }
 
         HttpRequest request = new HttpRequest(requestUrl, httpReqComboBox.getValue());
+
+        boolean isParamsEmpty = requestParamsListView.getItems().isEmpty();
+        if (!isParamsEmpty) {
+            parseRequestParams(request);
+        }
+
         httpClient.makeHttpRequest(request, new OnHttpClientListener() {
             @Override
             public void onRequestFailure() {
@@ -241,6 +246,22 @@ public class MainController implements Initializable {
                 });
             }
         });
+    }
+
+    private void parseRequestParams(HttpRequest request){
+        List<Attribute> paramsList = new ArrayList<>(requestParamsListView.getItems());
+        Map<String, String> paramsMap = new HashMap<>(paramsList.size());
+        for (Attribute attribute : paramsList) {
+            if (attribute.getKey().isEmpty() ||
+                    attribute.getValue().isEmpty() ||
+                    !attribute.isUserChoice()) {
+                continue;
+            }
+            paramsMap.putIfAbsent(attribute.getKey(), attribute.getValue());
+        }
+        if (!paramsMap.isEmpty()) {
+            request.setRequestParams(paramsMap);
+        }
     }
 
     private void bindHeaderListView(Map<String, List<String>> headers){
