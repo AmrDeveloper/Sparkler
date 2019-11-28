@@ -43,14 +43,19 @@ public class HttpClient {
                 Map<String, List<String>> headersMap = response.headers().toMultimap();
                 String contentType = Objects.requireNonNull(response.header("Content-Type")).split(";")[0];
                 Language contentLanguage = Language.TEXT;
-                if(contentType.contains("json")){
+                if (contentType.contains("json")) {
                     contentLanguage = Language.JSON;
-                }else if(contentType.contains("html")){
+                } else if (contentType.contains("html")) {
                     contentLanguage = Language.HTML;
-                }else if(contentType.contains("xml")){
+                } else if (contentType.contains("xml")) {
                     contentLanguage = Language.XML;
                 }
-                HttpResponse httpResponse = new HttpResponse(responseCode, responseBody, contentLanguage, headersMap);
+
+                long requestAt = response.sentRequestAtMillis();
+                long receiveAt = response.receivedResponseAtMillis();
+                long requestTime = receiveAt - requestAt;
+
+                HttpResponse httpResponse = new HttpResponse(responseCode, requestTime, responseBody, contentLanguage, headersMap);
                 listener.onRequestSuccessful(httpResponse);
             }
         });
@@ -59,23 +64,23 @@ public class HttpClient {
     private Request createHttpClientRequest(HttpRequest request) {
         Request.Builder requestBuilder = new Request.Builder();
 
-        if(request.getRequestParams() != null) {
+        if (request.getRequestParams() != null) {
             //Bind Parameters
             String requestUrl = bindQueryParameter(request.getRequestUrl(), request.getRequestParams());
             requestBuilder.url(requestUrl);
-        }else{
+        } else {
             requestBuilder.url(request.getRequestUrl());
         }
 
-        if(request.getRequestHeadersMap() != null) {
+        if (request.getRequestHeadersMap() != null) {
             //Bind Headers
             requestBuilder = bindRequestHeaders(requestBuilder, request.getRequestHeadersMap());
         }
 
-        if(request.getRequestBodyMap() != null) {
+        if (request.getRequestBodyMap() != null) {
             //Bind Body
             RequestBody requestBody = bindRequestBody(request.getRequestBodyMap());
-            switch (request.getRequestMethod()){
+            switch (request.getRequestMethod()) {
                 case POST:
                     requestBuilder = requestBuilder.post(requestBody);
                     break;
@@ -90,8 +95,8 @@ public class HttpClient {
                     break;
             }
 
-        }else{
-            switch (request.getRequestMethod()){
+        } else {
+            switch (request.getRequestMethod()) {
                 case GET:
                     requestBuilder = requestBuilder.get();
                     break;

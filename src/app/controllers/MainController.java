@@ -156,8 +156,11 @@ public class MainController implements Initializable {
             public void onRequestSuccessful(HttpResponse response) {
                 Platform.runLater(() -> {
                     //Update response Code
-                    String responseCode = String.valueOf(response.getResponseCode());
-                    statusLabel.setText("Status" + responseCode);
+                    String responseCode = "Status : " + response.getResponseCode();
+                    statusLabel.setText(responseCode);
+
+                    String time = "Time : " + response.getRequestTime() + "ms";
+                    timeLabel.setText(time);
 
                     //Update Response Body
                     String responseBody = response.getResponseBody();
