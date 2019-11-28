@@ -3,16 +3,20 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
-            prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="app.controllers.SettingsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.SettingsController">
     <children>
-        <JFXButton fx:id="settingsSaveButton" layoutX="85.0" layoutY="439.0" text="Save"/>
-        <JFXButton fx:id="settingsCloseButton" layoutX="220.0" layoutY="439.0" text="close"/>
-        <JFXToggleButton fx:id="themeToggleButton" layoutX="156.0" layoutY="147.0" size="5.0" text="Dark theme"/>
-        <Label layoutX="64.0" layoutY="155.0" text="Theme :"/>
+        <JFXButton fx:id="settingsSaveButton" layoutX="85.0" layoutY="439.0" text="Save" />
+        <JFXButton fx:id="settingsCloseButton" layoutX="220.0" layoutY="439.0" text="close" />
+        <JFXToggleButton fx:id="themeToggleButton" layoutX="181.0" layoutY="163.0" size="5.0" text="Dark theme" />
+        <Label layoutX="107.0" layoutY="171.0" text="Theme" />
+      <Label layoutX="63.0" layoutY="211.0" text="Connect timeout" />
+      <Label layoutX="80.0" layoutY="243.0" text="Read timeout" />
+      <Label layoutX="77.0" layoutY="274.0" text="Write timeout" />
+      <TextField layoutX="181.0" layoutY="207.0" prefHeight="25.0" prefWidth="107.0" />
+      <TextField layoutX="181.0" layoutY="239.0" prefHeight="25.0" prefWidth="107.0" />
+      <TextField layoutX="181.0" layoutY="270.0" prefHeight="25.0" prefWidth="107.0" />
     </children>
 </AnchorPane>
