@@ -88,6 +88,8 @@ public class MainController implements Initializable {
 
         requestsListView.setOnMouseClicked(e -> onHistoryListClickAction());
         setupRequestParamsListView();
+        setupRequestHeadersListView();
+        setupRequestBodyDataListView();
     }
 
     private void setupComboBoxes(){
@@ -141,6 +143,44 @@ public class MainController implements Initializable {
                     int selectedIndex = requestParamsListView.getSelectionModel().getSelectedIndex();
                     if (selectedIndex != -1) {
                         requestParamsListView.getItems().remove(selectedIndex);
+                    }
+                    break;
+                }
+            }
+        });
+    }
+
+    private void setupRequestHeadersListView(){
+        requestHeadersListView.getItems().add(new Attribute("", ""));
+        requestHeadersListView.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case ENTER: {
+                    requestHeadersListView.getItems().add(new Attribute("", ""));
+                    break;
+                }
+                case DELETE: {
+                    int selectedIndex = requestHeadersListView.getSelectionModel().getSelectedIndex();
+                    if (selectedIndex != -1) {
+                        requestHeadersListView.getItems().remove(selectedIndex);
+                    }
+                    break;
+                }
+            }
+        });
+    }
+
+    private void setupRequestBodyDataListView(){
+        requestBodyDataListView.getItems().add(new Attribute("", ""));
+        requestBodyDataListView.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case ENTER: {
+                    requestBodyDataListView.getItems().add(new Attribute("", ""));
+                    break;
+                }
+                case DELETE: {
+                    int selectedIndex = requestBodyDataListView.getSelectionModel().getSelectedIndex();
+                    if (selectedIndex != -1) {
+                        requestBodyDataListView.getItems().remove(selectedIndex);
                     }
                     break;
                 }
