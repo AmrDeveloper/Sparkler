@@ -25,6 +25,7 @@ public class AttributeListCell extends SparklerListCell<Attribute> {
     public void onViewUpdate(Attribute attribute) {
         attributeKeyField.setText(attribute.getKey());
         attributeNameField.setText(attribute.getValue());
+        attributeCheckbox.setSelected(attribute.isUserChoice());
 
         attributeKeyField.textProperty().addListener((observable, oldValue, newValue) -> {
             attribute.setKey(newValue);

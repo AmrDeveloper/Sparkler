@@ -1,6 +1,7 @@
 package app.net;
 
 import app.editor.Language;
+import app.utils.Log;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -68,8 +69,10 @@ public class HttpClient {
             //Bind Parameters
             String requestUrl = bindQueryParameter(request.getRequestUrl(), request.getRequestParams());
             requestBuilder = requestBuilder.url(requestUrl);
+            Log.info("Url Yes", requestUrl);
         } else {
             requestBuilder = requestBuilder.url(request.getRequestUrl());
+            Log.info("Url No", request.getRequestUrl());
         }
 
         if (request.getRequestHeadersMap() != null) {

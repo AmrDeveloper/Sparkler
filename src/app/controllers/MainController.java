@@ -210,6 +210,11 @@ public class MainController implements Initializable {
             parseRequestParams(request);
         }
 
+        boolean isHeadersEmpty = requestHeadersListView.getItems().isEmpty();
+        if(!isHeadersEmpty){
+            parseRequestHeaders(request);
+        }
+
         httpClient.makeHttpRequest(request, new OnHttpClientListener() {
             @Override
             public void onRequestFailure() {
@@ -260,7 +265,24 @@ public class MainController implements Initializable {
             paramsMap.putIfAbsent(attribute.getKey(), attribute.getValue());
         }
         if (!paramsMap.isEmpty()) {
+            System.out.println(paramsMap);
             request.setRequestParams(paramsMap);
+        }
+    }
+
+    private void parseRequestHeaders(HttpRequest request){
+        List<Attribute> paramsList = new ArrayList<>(requestHeadersListView.getItems());
+        Map<String, String> paramsMap = new HashMap<>(paramsList.size());
+        for (Attribute attribute : paramsList) {
+            if (attribute.getKey().isEmpty() ||
+                    attribute.getValue().isEmpty() ||
+                    !attribute.isUserChoice()) {
+                continue;
+            }
+            paramsMap.putIfAbsent(attribute.getKey(), attribute.getValue());
+        }
+        if (!paramsMap.isEmpty()) {
+            request.setRequestHeaders(paramsMap);
         }
     }
 

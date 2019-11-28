@@ -43,7 +43,7 @@ public class HttpRequest {
         this.requestBodyMap = requestBodyMap;
     }
 
-    public void setRequestHeadersMap(Map<String, String> requestHeadersMap) {
+    public void setRequestHeaders(Map<String, String> requestHeadersMap) {
         this.requestHeadersMap = requestHeadersMap;
     }
 

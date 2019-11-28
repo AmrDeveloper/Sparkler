@@ -9,7 +9,7 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import java.awt.BorderLayout;
+import java.awt.*;
 
 public class TextEditor extends SwingComponent {
 
@@ -21,6 +21,7 @@ public class TextEditor extends SwingComponent {
 
     public TextEditor() {
         setupNewEditor();
+        setDarkTheme();
     }
 
     private void setupNewEditor() {
@@ -76,25 +77,25 @@ public class TextEditor extends SwingComponent {
         }
     }
 
-    public void changeLanguageJSON() {
+    private void changeLanguageJSON() {
         mTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JSON);
         enableCodeSetup();
         mCurrentLanguage = Language.JSON;
     }
 
-    public void changeLanguageXML() {
+    private void changeLanguageXML() {
         mTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
         enableCodeSetup();
         mCurrentLanguage = Language.XML;
     }
 
-    public void changeLanguageHTML() {
+    private void changeLanguageHTML() {
         mTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_HTML);
         enableCodeSetup();
         mCurrentLanguage = Language.HTML;
     }
 
-    public void changeLanguageTEXT() {
+    private void changeLanguageTEXT() {
         mTextArea.setSyntaxEditingStyle("");
         disableCodeSetup();
         mCurrentLanguage = Language.TEXT;
@@ -109,18 +110,27 @@ public class TextEditor extends SwingComponent {
         return mCurrentLanguage;
     }
 
-    private void enableCodeSetup(){
+    private void enableCodeSetup() {
         mTextArea.setBracketMatchingEnabled(true);
         mTextArea.setCloseMarkupTags(true);
         mTextArea.setCloseCurlyBraces(true);
         mTextArea.setCodeFoldingEnabled(true);
     }
 
-    private void disableCodeSetup(){
+    private void disableCodeSetup() {
         mTextArea.setBracketMatchingEnabled(false);
         mTextArea.setCloseMarkupTags(false);
         mTextArea.setCloseCurlyBraces(false);
         mTextArea.setCodeFoldingEnabled(false);
+    }
+
+    public void setWhiteTheme() {
+        //TODO : Set white theme to this text editor
+    }
+
+    public void setDarkTheme() {
+        //TODO : set Dark theme to this text editor
+
     }
 
     @Override
