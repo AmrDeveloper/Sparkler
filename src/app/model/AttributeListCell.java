@@ -3,9 +3,8 @@ package app.model;
 import app.utils.SparklerListCell;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-
-import java.awt.*;
 
 public class AttributeListCell extends SparklerListCell<Attribute> {
 

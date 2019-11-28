@@ -8,8 +8,8 @@ import javafx.scene.layout.AnchorPane;
 public class RequestListCell extends SparklerListCell<Request> {
 
     @FXML private AnchorPane requestViewLayout;
-    @FXML private Label requestMethodLabel;
     @FXML private Label requestUrlLabel;
+    @FXML private Label requestMethodLabel;
 
     private static final String REQUEST_VIEW_LAYOUT = "../views/request_view.fxml";
 
@@ -19,8 +19,8 @@ public class RequestListCell extends SparklerListCell<Request> {
 
     @Override
     public void onViewUpdate(Request request) {
-        requestMethodLabel.setText(request.getMethod().name());
         requestUrlLabel.setText(request.getUrl());
+        requestMethodLabel.setText(request.getMethod().name());
         setGraphic(requestViewLayout);
     }
 }
