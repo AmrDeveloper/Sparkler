@@ -5,6 +5,7 @@ import app.model.*;
 import app.net.*;
 import app.sockets.SocketManager;
 import app.utils.ClipboardUtils;
+import app.utils.Intent;
 import app.utils.Log;
 import app.editor.Language;
 import app.editor.TextEditor;
@@ -13,6 +14,7 @@ import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 
 import java.net.URL;
 import java.util.*;
@@ -62,6 +64,10 @@ public class MainController implements Initializable {
     @FXML private Button socketEventStopAll;
     @FXML private Button socketEventAddListener;
 
+    @FXML private MenuItem exitMenu;
+    @FXML private MenuItem settingMenu;
+    @FXML private MenuItem aboutMenu;
+
     private TextEditor requestBodyEditor;
     private TextEditor responseBodyEditor;
     private final HttpClient httpClient = new HttpClient();
@@ -73,6 +79,7 @@ public class MainController implements Initializable {
         setupListViews();
         setupComboBoxes();
         setupButtons();
+        setupMenus();
     }
 
     private void setupListViews(){
@@ -128,11 +135,29 @@ public class MainController implements Initializable {
         responseBodyEditor.setEditable(false);
     }
 
-    private void setupRequestParamsListView(){
+    private void setupMenus(){
+        exitMenu.setOnAction(e -> {
+            Platform.exit();
+            System.exit(0);
+        });
+
+        settingMenu.setOnAction(e -> {
+            Intent intent = Intent.getIntent();
+            String settingsView = "../views/settings_view.fxml";
+            intent.showAnotherView(settingsView, "Settings", new Image("/app/res/sparkler_icon.png"));
+        });
+
+        aboutMenu.setOnAction(e -> {
+
+        });
+    }
+
+    private void setupRequestParamsListView() {
         requestParamsListView.getItems().add(new Attribute("", ""));
         requestParamsListView.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case ENTER: {
+                    //TODO : attribute lose information when add new item
                     requestParamsListView.getItems().add(new Attribute("", ""));
                     break;
                 }
@@ -147,11 +172,12 @@ public class MainController implements Initializable {
         });
     }
 
-    private void setupRequestHeadersListView(){
+    private void setupRequestHeadersListView() {
         requestHeadersListView.getItems().add(new Attribute("", ""));
         requestHeadersListView.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case ENTER: {
+                    //TODO : attribute lose information when add new item
                     requestHeadersListView.getItems().add(new Attribute("", ""));
                     break;
                 }
@@ -166,11 +192,12 @@ public class MainController implements Initializable {
         });
     }
 
-    private void setupRequestBodyDataListView(){
+    private void setupRequestBodyDataListView() {
         requestBodyDataListView.getItems().add(new Attribute("", ""));
         requestBodyDataListView.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case ENTER: {
+                    //TODO : attribute lose information when add new item
                     requestBodyDataListView.getItems().add(new Attribute("", ""));
                     break;
                 }

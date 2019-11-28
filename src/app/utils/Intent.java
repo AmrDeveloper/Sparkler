@@ -71,7 +71,6 @@ public class Intent extends IntentStorage {
             stage.setScene(scene);
             stage.setTitle(title);
             stage.setAlwaysOnTop(onTop);
-            //stage.getIcons().add(Astro.APP_ICON);
             stage.show();
             return controller;
         } catch (IOException e) {
@@ -92,7 +91,6 @@ public class Intent extends IntentStorage {
             stage.setTitle(title);
             stage.setAlwaysOnTop(true);
             stage.getIcons().add(icon);
-            //stage.getIcons().add(Astro.APP_ICON);
             stage.show();
             return controller;
         } catch (IOException e) {
