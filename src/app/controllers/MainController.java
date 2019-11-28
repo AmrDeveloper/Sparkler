@@ -86,6 +86,7 @@ public class MainController implements Initializable {
         responseHeaderListView.setCellFactory(list -> new HeaderListCell());
 
         requestsListView.setOnMouseClicked(e -> onHistoryListClickAction());
+        requestParamsListView.getItems().add(new Attribute("",""));
     }
 
     private void setupComboBoxes(){
