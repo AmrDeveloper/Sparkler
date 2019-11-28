@@ -65,7 +65,6 @@ public class HttpClient {
     private Request createHttpClientRequest(HttpRequest request) {
         Request.Builder requestBuilder = new Request.Builder();
 
-
         if (request.getRequestParams() != null) {
             //Bind Parameters
             String requestUrl = bindQueryParameter(request.getRequestUrl(), request.getRequestParams());
