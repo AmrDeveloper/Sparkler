@@ -92,14 +92,15 @@ public class HttpClient {
         }
 
         RequestBody requestBody;
+
         if (request.getRequestBodyMap() != null) {
             //Bind Body Map
             requestBody = bindRequestBody(request.getRequestBodyMap());
-        }else{
+        } else if (request.getRequestBody() != null && !request.getRequestBody().isEmpty()) {
             //Bind Body Text
             String bodyTxt = request.getRequestBody();
             MediaType mediaType;
-            switch (request.getBodyContentType()){
+            switch (request.getBodyContentType()) {
                 case JSON:
                     mediaType = MediaType.parse("application/json; charset=utf-8");
                     break;
@@ -114,6 +115,9 @@ public class HttpClient {
                     break;
             }
             requestBody = RequestBody.create(mediaType, bodyTxt);
+        } else {
+            //Body is Empty
+            requestBody = RequestBody.create(null, new byte[]{});
         }
 
         switch (request.getRequestMethod()) {

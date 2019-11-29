@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.util.*;
@@ -68,6 +69,8 @@ public class MainController implements Initializable {
     @FXML private MenuItem settingMenu;
     @FXML private MenuItem aboutMenu;
 
+    @FXML private HBox spinnerHbox;
+
     private TextEditor requestBodyEditor;
     private TextEditor responseBodyEditor;
     private final HttpClient httpClient = new HttpClient();
@@ -75,6 +78,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        spinnerHbox.setVisible(false);
         setupEditors();
         setupListViews();
         setupComboBoxes();
@@ -254,17 +258,21 @@ public class MainController implements Initializable {
         Language bodyLanguage = requestBodyRowComboBox.getValue();
         request.setBodyContentType(bodyLanguage);
 
+        spinnerHbox.setVisible(true);
+
         httpClient.makeHttpRequest(request, new OnHttpClientListener() {
             @Override
             public void onRequestFailure() {
                 Platform.runLater(() -> {
                     statusLabel.setText("Status : 404");
+                    spinnerHbox.setVisible(false);
                 });
             }
 
             @Override
             public void onRequestSuccessful(HttpResponse response) {
                 Platform.runLater(() -> {
+                    spinnerHbox.setVisible(false);
                     //Update response Code
                     String responseCode = "Status : " + response.getResponseCode();
                     statusLabel.setText(responseCode);

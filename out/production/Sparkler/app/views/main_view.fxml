@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXSpinner?>
 <?import javafx.embed.swing.SwingNode?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -14,6 +15,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.MainController">
@@ -139,6 +141,11 @@
                                                         </Tab>
                                                     </tabs>
                                                 </TabPane>
+                                    <HBox fx:id="spinnerHbox" alignment="CENTER" layoutX="228.0" layoutY="235.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="222.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="217.0" AnchorPane.topAnchor="222.0">
+                                       <children>
+                                          <JFXSpinner fx:id="loadingSpinner" />
+                                       </children>
+                                    </HBox>
                                             </children>
                                         </AnchorPane>
                                     </content>
