@@ -10,7 +10,7 @@ public abstract class SparklerListCell<T> extends ListCell<T> {
     private String mViewPath;
     private FXMLLoader mViewLoader;
 
-    public abstract void onViewUpdate(T item);
+    public abstract void onViewUpdate();
 
     public SparklerListCell(String viewPath) {
         this.mViewPath = viewPath;
@@ -29,14 +29,14 @@ public abstract class SparklerListCell<T> extends ListCell<T> {
     @Override
     protected void updateItem(T item, boolean empty) {
         super.updateItem(item, empty);
-        if (empty) {
+        if (empty || item == null) {
             setText(null);
             setGraphic(null);
         } else {
             if (mViewLoader == null) {
                 loadItemView();
             }
-            onViewUpdate(item);
+            onViewUpdate();
         }
     }
 }

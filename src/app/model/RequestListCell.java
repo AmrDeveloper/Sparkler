@@ -18,9 +18,9 @@ public class RequestListCell extends SparklerListCell<Request> {
     }
 
     @Override
-    public void onViewUpdate(Request request) {
-        requestUrlLabel.setText(request.getUrl());
-        requestMethodLabel.setText(request.getMethod().name());
+    public void onViewUpdate() {
+        requestUrlLabel.setText(getItem().getUrl());
+        requestMethodLabel.setText(getItem().getMethod().name());
         setGraphic(requestViewLayout);
     }
 }

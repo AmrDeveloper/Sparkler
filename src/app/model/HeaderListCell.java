@@ -18,9 +18,9 @@ public class HeaderListCell extends SparklerListCell<Header> {
     }
 
     @Override
-    public void onViewUpdate(Header header) {
-        responseHeaderKey.setText(header.getKey());
-        responseHeaderValue.setText(header.getValue());
+    public void onViewUpdate() {
+        responseHeaderKey.setText(getItem().getKey());
+        responseHeaderValue.setText(getItem().getValue());
         setGraphic(responseHeaderLayout);
     }
 }

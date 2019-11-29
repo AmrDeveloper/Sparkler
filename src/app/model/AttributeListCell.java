@@ -1,8 +1,6 @@
 package app.model;
 
 import app.utils.SparklerListCell;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -22,21 +20,21 @@ public class AttributeListCell extends SparklerListCell<Attribute> {
     }
 
     @Override
-    public void onViewUpdate(Attribute attribute) {
-        attributeKeyField.setText(attribute.getKey());
-        attributeNameField.setText(attribute.getValue());
-        attributeCheckbox.setSelected(attribute.isUserChoice());
+    public void onViewUpdate() {
+        attributeKeyField.setText(getItem().getKey());
+        attributeNameField.setText(getItem().getValue());
+        attributeCheckbox.setSelected(getItem().isUserChoice());
 
         attributeKeyField.textProperty().addListener((observable, oldValue, newValue) -> {
-            attribute.setKey(newValue);
+            getItem().setKey(newValue);
         });
 
         attributeNameField.textProperty().addListener((observable, oldValue, newValue) -> {
-            attribute.setValue(newValue);
+            getItem().setValue(newValue);
         });
 
         attributeCheckbox.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            attribute.setUserChoice(newValue);
+            getItem().setUserChoice(newValue);
         });
 
         setGraphic(attributeViewLayout);

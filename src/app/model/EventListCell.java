@@ -26,8 +26,8 @@ public class EventListCell extends SparklerListCell<Event> {
     }
 
     @Override
-    public void onViewUpdate(Event event) {
-        listenCounterLabel.setText(event.getNotifyNumber() + "");
+    public void onViewUpdate() {
+        listenCounterLabel.setText(getItem().getNotifyNumber() + "");
 
         listenerButton.setOnMouseClicked(e -> {
             String eventName = eventNameField.getText();
@@ -35,21 +35,21 @@ public class EventListCell extends SparklerListCell<Event> {
                 Log.warn("EventCell", "Invalid Event Name");
                 return;
             }
-            event.setName(eventName);
-            if (event.isListening()) {
+            getItem().setName(eventName);
+            if (getItem().isListening()) {
                 listenerButton.setText("Start");
                 mSocketManager.stopSocketListener(eventName);
                 eventNameField.setEditable(true);
-                event.setListening(false);
+                getItem().setListening(false);
             } else {
                 listenerButton.setText("Stop");
-                event.setListening(true);
+                getItem().setListening(true);
                 eventNameField.setEditable(true);
                 mSocketManager.startSocketListener(eventName, () -> {
                     Platform.runLater(() -> {
-                        int eventNumber = event.getNotifyNumber();
+                        int eventNumber = getItem().getNotifyNumber();
                         eventNumber = eventNumber + 1;
-                        event.setNotifyNumber(eventNumber);
+                        getItem().setNotifyNumber(eventNumber);
                         listenCounterLabel.setText(String.valueOf(eventNumber));
                     });
                 });
