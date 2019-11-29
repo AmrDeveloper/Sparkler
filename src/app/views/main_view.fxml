@@ -50,7 +50,7 @@
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
                                                 <ComboBox fx:id="httpReqComboBox" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="85.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="15.0" />
-                                                <TextField fx:id="httpRequestTextField" layoutX="75.0" layoutY="14.0" prefHeight="25.0" prefWidth="440.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="15.0" />
+                                                <TextField fx:id="httpRequestTextField" alignment="CENTER" layoutX="75.0" layoutY="14.0" prefHeight="25.0" prefWidth="440.0" promptText="Http request url" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="15.0" />
                                                 <Button fx:id="sendRequestButton" layoutX="557.0" layoutY="14.0" mnemonicParsing="false" text="Send" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0" />
                                                 <TabPane fx:id="requestTabPane" layoutX="10.0" layoutY="47.0" prefHeight="200.0" prefWidth="615.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="50.0">
                                                     <tabs>

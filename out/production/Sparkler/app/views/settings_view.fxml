@@ -15,8 +15,8 @@
       <Label layoutX="63.0" layoutY="211.0" text="Connect timeout" />
       <Label layoutX="80.0" layoutY="243.0" text="Read timeout" />
       <Label layoutX="77.0" layoutY="274.0" text="Write timeout" />
-      <TextField layoutX="181.0" layoutY="207.0" prefHeight="25.0" prefWidth="107.0" />
-      <TextField layoutX="181.0" layoutY="239.0" prefHeight="25.0" prefWidth="107.0" />
-      <TextField layoutX="181.0" layoutY="270.0" prefHeight="25.0" prefWidth="107.0" />
+      <TextField fx:id="connectTimeoutValue" alignment="CENTER" layoutX="181.0" layoutY="207.0" prefHeight="25.0" prefWidth="107.0" promptText="Time in ms" />
+      <TextField fx:id="readTimeoutValue" alignment="CENTER" layoutX="181.0" layoutY="239.0" prefHeight="25.0" prefWidth="107.0" promptText="Time in ms" />
+      <TextField fx:id="writeTimeoutValue" alignment="CENTER" layoutX="181.0" layoutY="270.0" prefHeight="25.0" prefWidth="107.0" promptText="Time in ms" />
     </children>
 </AnchorPane>
