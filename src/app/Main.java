@@ -1,5 +1,8 @@
 package app;
 
+import app.utils.Settings;
+import app.utils.Theme;
+import app.utils.ThemeManager;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +25,10 @@ public class Main extends Application {
             System.exit(0);
         });
         primaryStage.show();
+
+        Settings settings = new Settings();
+        ThemeManager.setTheme(scene, Theme.valueOf(settings.getTheme()));
+        settings.setThemeChangeListener(theme -> ThemeManager.setTheme(scene, theme));
     }
 
     public static void main(String[] args) {
