@@ -53,7 +53,7 @@ public class Settings {
         return mSettingsPreference;
     }
 
-    public void setOnSettingChange(OnThemeChangeListener listener){
+    public void setThemeChangeListener(OnThemeChangeListener listener){
         mOnThemeChangeListener = listener;
     }
 

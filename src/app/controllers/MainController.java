@@ -10,6 +10,9 @@ import app.utils.Log;
 import app.editor.Language;
 import app.editor.TextEditor;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -76,6 +79,9 @@ public class MainController implements Initializable {
     private final HttpClient httpClient = new HttpClient();
     private final SocketManager mSocketManager = SocketManager.getInstance();
 
+    private ObservableList<Request> mRequestHistoryList = FXCollections.observableArrayList();
+    private FilteredList<Request> mRequestFilteredList = new FilteredList<>(mRequestHistoryList, s -> true);
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         spinnerHbox.setVisible(false);
@@ -84,9 +90,11 @@ public class MainController implements Initializable {
         setupComboBoxes();
         setupButtons();
         setupMenus();
+        historySearchSetup();
     }
 
     private void setupListViews(){
+        requestsListView.setItems(mRequestFilteredList);
         requestsListView.setCellFactory(list -> new RequestListCell());
         requestParamsListView.setCellFactory(list -> new AttributeListCell());
         requestHeadersListView .setCellFactory(list -> new AttributeListCell());
@@ -153,6 +161,16 @@ public class MainController implements Initializable {
 
         aboutMenu.setOnAction(e -> {
 
+        });
+    }
+
+    private void historySearchSetup(){
+        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue != null && !newValue.isEmpty()){
+                mRequestFilteredList.setPredicate(s -> s.getUrl().contains(newValue));
+            }else{
+                mRequestFilteredList.setPredicate(s -> true);
+            }
         });
     }
 
@@ -291,7 +309,7 @@ public class MainController implements Initializable {
 
                     //Insert this request to history
                     Request history = new Request(request.getRequestUrl(), request.getRequestMethod());
-                    requestsListView.getItems().add(history);
+                    mRequestHistoryList.add(history);
                 });
             }
         });
@@ -309,7 +327,6 @@ public class MainController implements Initializable {
             paramsMap.putIfAbsent(attribute.getKey(), attribute.getValue());
         }
         if (!paramsMap.isEmpty()) {
-            System.out.println(paramsMap);
             request.setRequestParams(paramsMap);
         }
     }
