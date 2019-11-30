@@ -19,6 +19,7 @@ public class Main extends Application {
         primaryStage.setTitle("Sparkler");
         primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/app/res/sparkler_icon.png")));
         Scene scene = new Scene(root, 800, 600);
+        scene.getStylesheets().add("app/styles/main_theme.css");
         primaryStage.setScene(scene);
         primaryStage.setOnCloseRequest(event -> {
             Platform.exit();

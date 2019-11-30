@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXSpinner?>
 <?import javafx.embed.swing.SwingNode?>
@@ -53,7 +54,6 @@
                                             <children>
                                                 <ComboBox fx:id="httpReqComboBox" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="85.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="15.0" />
                                                 <TextField fx:id="httpRequestTextField" alignment="CENTER" layoutX="75.0" layoutY="14.0" prefHeight="25.0" prefWidth="440.0" promptText="Http request url" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="15.0" />
-                                                <Button fx:id="sendRequestButton" layoutX="557.0" layoutY="14.0" mnemonicParsing="false" text="Send" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0" />
                                                 <TabPane fx:id="requestTabPane" layoutX="10.0" layoutY="47.0" prefHeight="200.0" prefWidth="615.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="50.0">
                                                     <tabs>
                                                         <Tab fx:id="requestParamsTab" text="Params">
@@ -146,6 +146,7 @@
                                           <JFXSpinner fx:id="loadingSpinner" />
                                        </children>
                                     </HBox>
+                                    <JFXButton fx:id="sendRequestButton" buttonType="RAISED" layoutX="569.0" layoutY="15.0" prefHeight="25.0" prefWidth="65.0" text="Send" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0" />
                                             </children>
                                         </AnchorPane>
                                     </content>
@@ -155,17 +156,15 @@
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
                                                 <TextField fx:id="socketUrlTextField" layoutX="74.0" layoutY="14.0" prefHeight="25.0" prefWidth="486.0" promptText="Socket Url" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="15.0" />
-                                                <Button fx:id="socketConnectButton" layoutX="569.0" layoutY="14.0" mnemonicParsing="false" text="Connect" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0" />
+                                                <JFXButton fx:id="socketConnectButton" layoutX="569.0" layoutY="14.0" mnemonicParsing="false" text="Connect" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0" />
                                                 <Label layoutX="11.0" layoutY="19.0" text="Socket Url : " AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="15.0" />
                                                 <TextField fx:id="socketEmitKey" layoutX="75.0" layoutY="63.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" promptText="Key" AnchorPane.leftAnchor="75.0" />
                                                 <TextField fx:id="socketEmitValue" layoutX="411.0" layoutY="63.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="359.0" promptText="Value" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="75.0" />
-                                                <Button fx:id="socketEmitButton" layoutX="569.0" layoutY="63.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Emit" AnchorPane.rightAnchor="5.0" />
+                                                <JFXButton fx:id="socketEmitButton" layoutX="569.0" layoutY="63.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Emit" AnchorPane.rightAnchor="5.0" />
                                                 <Label layoutX="14.0" layoutY="67.0" text="Emit         :" AnchorPane.leftAnchor="5.0" />
                                                 <ListView fx:id="socketEventListView" layoutX="14.0" layoutY="106.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="150.0" />
                                                 <Label layoutX="10.0" layoutY="110.0" text="Event Listeners" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="110.0" />
-                                                <Button fx:id="socketEventStopAll" layoutX="569.0" layoutY="106.0" mnemonicParsing="false" text="Stop All" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="110.0" />
-                                                <Button fx:id="socketEventStartAll" layoutX="512.0" layoutY="106.0" mnemonicParsing="false" text="Start All" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="110.0" />
-                                    <Button fx:id="socketEventAddListener" layoutX="444.0" layoutY="110.0" mnemonicParsing="false" text="Add" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="110.0" />
+                                    <JFXButton fx:id="socketEventAddListener" buttonType="RAISED" layoutX="443.0" layoutY="110.0" prefHeight="25.0" prefWidth="60.0" text="Add" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="110.0" />
                                             </children>
                                         </AnchorPane>
                                     </content>

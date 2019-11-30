@@ -9,6 +9,7 @@ import app.utils.Intent;
 import app.utils.Log;
 import app.editor.Language;
 import app.editor.TextEditor;
+import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,7 +31,7 @@ public class MainController implements Initializable {
 
     @FXML private TextField httpRequestTextField;
     @FXML private ComboBox<HttpMethod> httpReqComboBox;
-    @FXML private Button sendRequestButton;
+    @FXML private JFXButton sendRequestButton;
 
     @FXML private Label statusLabel;
     @FXML private Label timeLabel;
@@ -59,14 +60,12 @@ public class MainController implements Initializable {
     @FXML private Button responseBodyClearButton;
 
     @FXML private TextField socketUrlTextField;
-    @FXML private Button socketConnectButton;
+    @FXML private JFXButton socketConnectButton;
     @FXML private TextField socketEmitKey;
     @FXML private TextField socketEmitValue;
-    @FXML private Button socketEmitButton;
+    @FXML private JFXButton socketEmitButton;
     @FXML private ListView<Event> socketEventListView;
-    @FXML private Button socketEventStartAll;
-    @FXML private Button socketEventStopAll;
-    @FXML private Button socketEventAddListener;
+    @FXML private JFXButton socketEventAddListener;
 
     @FXML private MenuItem exitMenu;
     @FXML private MenuItem settingMenu;

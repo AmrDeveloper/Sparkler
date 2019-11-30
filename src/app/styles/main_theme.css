@@ -1,0 +1,9 @@
+.jfx-button {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #4285f4;
+    -fx-text-fill: white;
+}
+
+.jfx-button:hover {
+    -fx-background-color: #1a73e8;
+}
