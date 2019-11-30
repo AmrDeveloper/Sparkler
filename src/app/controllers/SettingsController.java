@@ -1,7 +1,9 @@
 package app.controllers;
 
+import app.utils.Log;
 import app.utils.Settings;
 import app.utils.Theme;
+import app.utils.Validation;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.fxml.FXML;
@@ -28,13 +30,38 @@ public class SettingsController implements Initializable {
         showCurrentValues();
 
         settingsSaveButton.setOnMouseClicked(e -> {
+            String connectTimeoutTxt = connectTimeoutValue.getText();
+            if (!Validation.isValidNumber(connectTimeoutTxt)) {
+                 //TODO : Show dialog that is invalid number
+                Log.warn("Setting", "Invalid Write timeout");
+                return;
+            }
+
+            String readTimeoutTxt = readTimeoutValue.getText();
+            if (!Validation.isValidNumber(readTimeoutTxt)) {
+                 //TODO : Show dialog that is invalid number
+                Log.warn("Setting", "Invalid Write timeout");
+                return;
+            }
+
+            String writeTimeoutTxt = writeTimeoutValue.getText();
+            if (!Validation.isValidNumber(writeTimeoutTxt)) {
+                //TODO : Show dialog that is invalid number
+                Log.warn("Setting", "Invalid Write timeout");
+                return;
+            }
+
             boolean isDark = themeToggleButton.isSelected();
             if(isDark){
                 settings.setTheme(Theme.DARK);
             }else{
                 settings.setTheme(Theme.WHITE);
             }
-            //TODO : update times values
+
+            settings.setConnectTimeout(Integer.parseInt(connectTimeoutTxt));
+            settings.setReadTimeout(Integer.parseInt(readTimeoutTxt));
+            settings.setWriteTimeout(Integer.parseInt(writeTimeoutTxt));
+
             Stage stage = (Stage) settingsSaveButton.getScene().getWindow();
             stage.close();
         });
