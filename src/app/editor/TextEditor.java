@@ -1,9 +1,9 @@
 package app.editor;
 
 import app.utils.SwingComponent;
+import app.utils.Theme;
 import javafx.embed.swing.SwingNode;
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rsyntaxtextarea.*;
 
 import org.fife.ui.rtextarea.RTextScrollPane;
 
@@ -21,6 +21,7 @@ public class TextEditor extends SwingComponent {
 
     public TextEditor() {
         setupNewEditor();
+        mTextArea.setHighlightCurrentLine(false);
     }
 
     private void setupNewEditor() {
@@ -123,13 +124,44 @@ public class TextEditor extends SwingComponent {
         mTextArea.setCodeFoldingEnabled(false);
     }
 
+    public void setEditorTheme(Theme theme){
+        if(theme == Theme.DARK){
+            setDarkTheme();
+        }else{
+            setWhiteTheme();
+        }
+    }
+
     public void setWhiteTheme() {
-        //TODO : Set white theme to this text editor
+        mTextArea.setBackground(Color.white);
+        SyntaxScheme ss = mTextArea.getSyntaxScheme();
+        ss.setStyle(Token.SEPARATOR, new Style(Color.BLACK));
+        ss.setStyle(Token.IDENTIFIER, new Style(Color.BLACK));
+        // show double quotes / strings in dark cyan
+        ss.setStyle(Token.LITERAL_STRING_DOUBLE_QUOTE,new Style(Color.red));
+        // show attributes in RapidMiner orange
+        ss.setStyle(Token.VARIABLE,new Style(Color.black));
+        // show unknown attributes that are placed in brackets in [] in black
+        ss.setStyle(Token.COMMENT_KEYWORD, new Style(Color.black));
+        // show operators that are not defined in the functions in black (like other unknown words)
+        ss.setStyle(Token.OPERATOR, new Style(Color.black));
+        mTextArea.revalidate();
     }
 
     public void setDarkTheme() {
-        //TODO : set Dark theme to this text editor
-
+        mTextArea.setBackground(Color.decode("#282a36"));
+        SyntaxScheme ss = mTextArea.getSyntaxScheme();
+        ss.setStyle(Token.SEPARATOR, new Style(Color.WHITE));
+        ss.setStyle(Token.IDENTIFIER, new Style(Color.WHITE));
+        // show double quotes / strings in dark cyan
+        ss.setStyle(Token.LITERAL_STRING_DOUBLE_QUOTE,new Style(Color.decode("#f1e669")));
+        // show attributes in RapidMiner orange
+        ss.setStyle(Token.VARIABLE,new Style(Color.decode("#50fa7b")));
+        // show unknown attributes that are placed in brackets in [] in black
+        ss.setStyle(Token.COMMENT_KEYWORD, new Style(Color.black));
+        // show operators that are not defined in the functions in black (like other unknown words)
+        ss.setStyle(Token.OPERATOR, new Style(Color.black));
+        mTextArea.revalidate();
     }
 
     @Override

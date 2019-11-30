@@ -90,6 +90,7 @@ public class MainController implements Initializable {
         setupButtons();
         setupMenus();
         historySearchSetup();
+        settings.setThemeChangeListener(onThemeChangeListener);
     }
 
     private void setupListViews(){
@@ -138,10 +139,14 @@ public class MainController implements Initializable {
     }
 
     private void setupEditors() {
+        Theme currentTheme = Theme.valueOf(settings.getTheme());
+
         requestBodyEditor = new TextEditor();
+        requestBodyEditor.setEditorTheme(currentTheme);
         requestBodyEditor.invoke(requestBodyNode);
 
         responseBodyEditor = new TextEditor();
+        responseBodyEditor.setEditorTheme(currentTheme);
         responseBodyEditor.invoke(responseBodyNode);
         responseBodyEditor.setEditable(false);
     }
@@ -416,4 +421,9 @@ public class MainController implements Initializable {
     private void addEventSocketButton(){
         socketEventListView.getItems().add(new Event("",0,false));
     }
+
+    private final OnThemeChangeListener onThemeChangeListener = (theme) -> {
+        requestBodyEditor.setEditorTheme(theme);
+        responseBodyEditor.setEditorTheme(theme);
+    };
 }
