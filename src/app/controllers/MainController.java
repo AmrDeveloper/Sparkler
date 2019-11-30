@@ -161,7 +161,6 @@ public class MainController implements Initializable {
         requestParamsListView.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case ENTER: {
-                    //TODO : attribute lose information when add new item
                     requestParamsListView.getItems().add(new Attribute("", ""));
                     break;
                 }
@@ -181,7 +180,6 @@ public class MainController implements Initializable {
         requestHeadersListView.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case ENTER: {
-                    //TODO : attribute lose information when add new item
                     requestHeadersListView.getItems().add(new Attribute("", ""));
                     break;
                 }
@@ -201,7 +199,6 @@ public class MainController implements Initializable {
         requestBodyDataListView.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case ENTER: {
-                    //TODO : attribute lose information when add new item
                     requestBodyDataListView.getItems().add(new Attribute("", ""));
                     break;
                 }

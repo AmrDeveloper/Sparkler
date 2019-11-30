@@ -25,7 +25,7 @@ public class SettingsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setupToggleThemeButton();
+        showCurrentValues();
 
         settingsSaveButton.setOnMouseClicked(e -> {
             boolean isDark = themeToggleButton.isSelected();
@@ -34,12 +34,25 @@ public class SettingsController implements Initializable {
             }else{
                 settings.setTheme(Theme.WHITE);
             }
+            //TODO : update times values
         });
 
         settingsCloseButton.setOnMouseClicked(e -> {
             Stage stage = (Stage) settingsCloseButton.getScene().getWindow();
             stage.close();
         });
+    }
+
+    private void showCurrentValues(){
+        setupToggleThemeButton();
+
+        int connectTimeout = settings.getConnectTimeout();
+        int readmeTimeout = settings.getReadTimeout();
+        int writeTimeout = settings.getWriteTimeout();
+
+        connectTimeoutValue.setText(String.valueOf(connectTimeout));
+        readTimeoutValue.setText(String.valueOf(readmeTimeout));
+        writeTimeoutValue.setText(String.valueOf(writeTimeout));
     }
 
     private void setupToggleThemeButton(){

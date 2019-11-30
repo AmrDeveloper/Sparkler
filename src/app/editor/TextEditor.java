@@ -21,7 +21,6 @@ public class TextEditor extends SwingComponent {
 
     public TextEditor() {
         setupNewEditor();
-        setDarkTheme();
     }
 
     private void setupNewEditor() {
