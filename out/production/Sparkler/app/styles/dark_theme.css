@@ -1,4 +1,16 @@
+.root {
+    -fx-accent: gray;
+    -fx-focus-color: #727579;
+    -fx-highlight-text-fill: white;
+    -fx-base: #292a2d;
+}
+
+.label{
+    -fx-text-fill: lightgray;
+}
+
 .text-field {
+    -fx-prompt-text-fill: #ccc;
     -fx-text-fill: #dbdcdc;
     -fx-background-color: #727579;
     -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
