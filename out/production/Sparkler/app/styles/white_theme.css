@@ -1,0 +1,11 @@
+.text-field {
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}
+
+.jfx-toggle-button {
+    -jfx-toggle-color: #4285f4;
+    -jfx-untoggle-color: #FAFAFA;
+    -jfx-toggle-line-color: #999999;
+    -jfx-untoggle-line-color: #999999;
+    -jfx-disable-visual-focus: false;
+}

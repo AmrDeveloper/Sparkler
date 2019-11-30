@@ -7,3 +7,8 @@
 .jfx-button:hover {
     -fx-background-color: #1a73e8;
 }
+
+.jfx-check-box {
+    -jfx-checked-color: #4285f4;
+    -jfx-unchecked-color: #727579;
+}

@@ -4,10 +4,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import com.jfoenix.controls.JFXCheckBox?>
 <AnchorPane fx:id="attributeViewLayout" minHeight="-Infinity" minWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="attributeNameField" layoutX="337.0" layoutY="5.0" prefHeight="25.0" prefWidth="282.0" promptText="Value" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
       <TextField fx:id="attributeKeyField" layoutX="41.0" layoutY="5.0" promptText="Key" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="5.0" />
-      <CheckBox fx:id="attributeCheckbox" layoutX="7.0" layoutY="9.0" mnemonicParsing="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
+      <JFXCheckBox fx:id="attributeCheckbox" layoutX="7.0" layoutY="9.0" mnemonicParsing="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
    </children>
 </AnchorPane>
