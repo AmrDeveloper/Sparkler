@@ -35,6 +35,8 @@ public class SettingsController implements Initializable {
                 settings.setTheme(Theme.WHITE);
             }
             //TODO : update times values
+            Stage stage = (Stage) settingsSaveButton.getScene().getWindow();
+            stage.close();
         });
 
         settingsCloseButton.setOnMouseClicked(e -> {
