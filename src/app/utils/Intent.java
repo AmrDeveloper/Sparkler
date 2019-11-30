@@ -7,13 +7,11 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 public class Intent extends IntentStorage {
 
     private static Intent mIntent;
     private static final String DEBUG_TAG = Intent.class.getSimpleName();
-    private static final Logger debug = Logger.getLogger(DEBUG_TAG);
 
     synchronized public static Intent getIntent() {
         if (mIntent == null) {
@@ -28,14 +26,15 @@ public class Intent extends IntentStorage {
             Parent root = loader.load();
             T controller = loader.getController();
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(ThemeManager.MAIN_THEME_PATH);
+            stage.setScene(scene);
             stage.setTitle(title);
             stage.setAlwaysOnTop(true);
-            //stage.getIcons().add(Astro.APP_ICON);
             stage.show();
             return controller;
         } catch (IOException e) {
-            debug.warning("Can't Open location : " + viewLocation);
+            Log.warn(DEBUG_TAG, "Can't Open location : " + viewLocation);
             return null;
         }
     }
@@ -48,14 +47,14 @@ public class Intent extends IntentStorage {
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             scene.getStylesheets().add(style);
+            scene.getStylesheets().add(ThemeManager.MAIN_THEME_PATH);
             stage.setScene(scene);
             stage.setTitle(title);
             stage.setAlwaysOnTop(true);
-            //stage.getIcons().add(Astro.APP_ICON);
             stage.show();
             return controller;
         } catch (IOException e) {
-            debug.warning("Can't Open location : " + viewLocation);
+            Log.warn(DEBUG_TAG,"Can't Open location : " + viewLocation);
             return null;
         }
     }
@@ -68,13 +67,14 @@ public class Intent extends IntentStorage {
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             scene.getStylesheets().add(style);
+            scene.getStylesheets().add(ThemeManager.MAIN_THEME_PATH);
             stage.setScene(scene);
             stage.setTitle(title);
             stage.setAlwaysOnTop(onTop);
             stage.show();
             return controller;
         } catch (IOException e) {
-            debug.warning("Can't Open location : " + viewLocation);
+            Log.warn(DEBUG_TAG,"Can't Open location : " + viewLocation);
             return null;
         }
     }
@@ -87,14 +87,16 @@ public class Intent extends IntentStorage {
             Parent root = loader.load();
             T controller = loader.getController();
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(ThemeManager.MAIN_THEME_PATH);
+            stage.setScene(scene);
             stage.setTitle(title);
             stage.setAlwaysOnTop(true);
             stage.getIcons().add(icon);
             stage.show();
             return controller;
         } catch (IOException e) {
-            debug.warning("Can't Open location : " + viewLocation);
+            Log.warn(DEBUG_TAG,"Can't Open location : " + viewLocation);
             return null;
         }
     }
@@ -107,6 +109,7 @@ public class Intent extends IntentStorage {
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             scene.getStylesheets().add(style);
+            scene.getStylesheets().add(ThemeManager.MAIN_THEME_PATH);
             stage.setScene(scene);
             stage.setTitle(title);
             stage.setAlwaysOnTop(true);
@@ -114,7 +117,7 @@ public class Intent extends IntentStorage {
             stage.show();
             return controller;
         } catch (IOException e) {
-            debug.warning("Can't Open location : " + viewLocation);
+            Log.warn(DEBUG_TAG,"Can't Open location : " + viewLocation);
             return null;
         }
     }
@@ -125,7 +128,7 @@ public class Intent extends IntentStorage {
             loader.load();
             return loader.getController();
         } catch (IOException e) {
-            debug.warning("Can't Open location : " + viewLocation);
+            Log.warn(DEBUG_TAG,"Can't Open location : " + viewLocation);
             return null;
         }
     }

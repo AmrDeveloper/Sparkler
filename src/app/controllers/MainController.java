@@ -4,9 +4,7 @@ import app.model.*;
 
 import app.net.*;
 import app.sockets.SocketManager;
-import app.utils.ClipboardUtils;
-import app.utils.Intent;
-import app.utils.Log;
+import app.utils.*;
 import app.editor.Language;
 import app.editor.TextEditor;
 import com.jfoenix.controls.JFXButton;
@@ -75,6 +73,8 @@ public class MainController implements Initializable {
 
     private TextEditor requestBodyEditor;
     private TextEditor responseBodyEditor;
+
+    private final Settings settings = new Settings();
     private final HttpClient httpClient = new HttpClient();
     private final SocketManager mSocketManager = SocketManager.getInstance();
 
@@ -153,9 +153,11 @@ public class MainController implements Initializable {
         });
 
         settingMenu.setOnAction(e -> {
+            Theme currentTheme = Theme.valueOf(settings.getTheme());
             Intent intent = Intent.getIntent();
             String settingsView = "../views/settings_view.fxml";
-            intent.showAnotherView(settingsView, "Settings", new Image("/app/res/sparkler_icon.png"));
+            String themePath = ThemeManager.getThemePath(currentTheme);
+            intent.showAnotherView(settingsView, "Settings", themePath, new Image("/app/res/sparkler_icon.png"));
         });
 
         aboutMenu.setOnAction(e -> {

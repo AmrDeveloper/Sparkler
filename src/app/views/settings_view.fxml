@@ -9,7 +9,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.SettingsController">
     <children>
         <JFXButton fx:id="settingsSaveButton" layoutX="85.0" layoutY="439.0" text="Save" />
-        <JFXButton fx:id="settingsCloseButton" layoutX="220.0" layoutY="439.0" text="close" />
+        <JFXButton fx:id="settingsCloseButton" layoutX="220.0" layoutY="439.0" text="Close" />
         <JFXToggleButton fx:id="themeToggleButton" layoutX="181.0" layoutY="163.0" size="5.0" text="Dark theme" />
         <Label layoutX="107.0" layoutY="171.0" text="Theme" />
       <Label layoutX="63.0" layoutY="211.0" text="Connect timeout" />
