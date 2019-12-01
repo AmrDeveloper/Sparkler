@@ -5,6 +5,7 @@ import app.utils.Theme;
 import javafx.embed.swing.SwingNode;
 import org.fife.ui.rsyntaxtextarea.*;
 
+import org.fife.ui.rtextarea.Gutter;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.JPanel;
@@ -16,16 +17,18 @@ public class TextEditor extends SwingComponent {
     private RSyntaxTextArea mTextArea;
     private RTextScrollPane mTextScrollPane;
 
+    private Gutter mTextAreaGutter;
     private Language mCurrentLanguage = Language.TEXT;
     private static final TextFormatter mFormatter = new TextFormatter();
 
     public TextEditor() {
         setupNewEditor();
-        mTextArea.setHighlightCurrentLine(false);
+        mTextAreaGutter = RSyntaxUtilities.getGutter(mTextArea);
     }
 
     private void setupNewEditor() {
         mTextArea = new RSyntaxTextArea();
+        mTextArea.setHighlightCurrentLine(false);
         mTextScrollPane = new RTextScrollPane(mTextArea);
         JPanel jPanel = new JPanel(new BorderLayout());
         jPanel.add(mTextScrollPane);
@@ -133,34 +136,32 @@ public class TextEditor extends SwingComponent {
     }
 
     public void setWhiteTheme() {
+        mTextArea.setCaretColor(Color.BLACK);
         mTextArea.setBackground(Color.white);
-        SyntaxScheme ss = mTextArea.getSyntaxScheme();
-        ss.setStyle(Token.SEPARATOR, new Style(Color.BLACK));
-        ss.setStyle(Token.IDENTIFIER, new Style(Color.BLACK));
-        // show double quotes / strings in dark cyan
-        ss.setStyle(Token.LITERAL_STRING_DOUBLE_QUOTE,new Style(Color.red));
-        // show attributes in RapidMiner orange
-        ss.setStyle(Token.VARIABLE,new Style(Color.black));
-        // show unknown attributes that are placed in brackets in [] in black
-        ss.setStyle(Token.COMMENT_KEYWORD, new Style(Color.black));
-        // show operators that are not defined in the functions in black (like other unknown words)
-        ss.setStyle(Token.OPERATOR, new Style(Color.black));
+        mTextAreaGutter.setBackground(Color.white);
+
+        SyntaxScheme syntaxScheme = mTextArea.getSyntaxScheme();
+        syntaxScheme.setStyle(Token.SEPARATOR, new Style(Color.BLACK));
+        syntaxScheme.setStyle(Token.IDENTIFIER, new Style(Color.BLACK));
+        syntaxScheme.setStyle(Token.LITERAL_STRING_DOUBLE_QUOTE,new Style(Color.red));
+        syntaxScheme.setStyle(Token.VARIABLE,new Style(Color.black));
+        syntaxScheme.setStyle(Token.COMMENT_KEYWORD, new Style(Color.black));
+        syntaxScheme.setStyle(Token.OPERATOR, new Style(Color.black));
         mTextArea.revalidate();
     }
 
     public void setDarkTheme() {
-        mTextArea.setBackground(Color.decode("#282a36"));
-        SyntaxScheme ss = mTextArea.getSyntaxScheme();
-        ss.setStyle(Token.SEPARATOR, new Style(Color.WHITE));
-        ss.setStyle(Token.IDENTIFIER, new Style(Color.WHITE));
-        // show double quotes / strings in dark cyan
-        ss.setStyle(Token.LITERAL_STRING_DOUBLE_QUOTE,new Style(Color.decode("#f1e669")));
-        // show attributes in RapidMiner orange
-        ss.setStyle(Token.VARIABLE,new Style(Color.decode("#50fa7b")));
-        // show unknown attributes that are placed in brackets in [] in black
-        ss.setStyle(Token.COMMENT_KEYWORD, new Style(Color.black));
-        // show operators that are not defined in the functions in black (like other unknown words)
-        ss.setStyle(Token.OPERATOR, new Style(Color.black));
+        mTextArea.setCaretColor(Color.LIGHT_GRAY);
+        mTextArea.setBackground(Color.decode("#292a2d"));
+        mTextAreaGutter.setBackground(Color.decode("#292a2d"));
+
+        SyntaxScheme syntaxScheme = mTextArea.getSyntaxScheme();
+        syntaxScheme.setStyle(Token.SEPARATOR, new Style(Color.LIGHT_GRAY));
+        syntaxScheme.setStyle(Token.IDENTIFIER, new Style(Color.LIGHT_GRAY));
+        syntaxScheme.setStyle(Token.LITERAL_STRING_DOUBLE_QUOTE,new Style(Color.decode("#f1e669")));
+        syntaxScheme.setStyle(Token.VARIABLE,new Style(Color.decode("#50fa7b")));
+        syntaxScheme.setStyle(Token.COMMENT_KEYWORD, new Style(Color.black));
+        syntaxScheme.setStyle(Token.OPERATOR, new Style(Color.black));
         mTextArea.revalidate();
     }
 
