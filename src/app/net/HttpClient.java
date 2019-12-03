@@ -67,7 +67,13 @@ public class HttpClient {
                 long receiveAt = response.receivedResponseAtMillis();
                 long requestTime = receiveAt - requestAt;
 
-                HttpResponse httpResponse = new HttpResponse(responseCode, requestTime, responseBody, contentLanguage, headersMap);
+                float responseSize = responseBody.length() / 1000.0f;
+
+                HttpResponse httpResponse = new HttpResponse(
+                        responseCode, requestTime, responseSize,
+                        responseBody, contentLanguage,
+                        headersMap);
+
                 listener.onRequestSuccessful(httpResponse);
             }
         });

@@ -33,6 +33,7 @@ public class MainController implements Initializable {
 
     @FXML private Label statusLabel;
     @FXML private Label timeLabel;
+    @FXML private Label sizeLabel;
 
     @FXML private TabPane requestTabPane;
     @FXML private Tab requestParamsTab;
@@ -69,7 +70,7 @@ public class MainController implements Initializable {
     @FXML private MenuItem settingMenu;
     @FXML private MenuItem aboutMenu;
 
-    @FXML private HBox spinnerHbox;
+    @FXML private HBox spinnerLayout;
 
     private TextEditor requestBodyEditor;
     private TextEditor responseBodyEditor;
@@ -83,7 +84,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        spinnerHbox.setVisible(false);
+        spinnerLayout.setVisible(false);
         setupEditors();
         setupListViews();
         setupComboBoxes();
@@ -279,27 +280,30 @@ public class MainController implements Initializable {
         Language bodyLanguage = requestBodyRowComboBox.getValue();
         request.setBodyContentType(bodyLanguage);
 
-        spinnerHbox.setVisible(true);
+        spinnerLayout.setVisible(true);
 
         httpClient.makeHttpRequest(request, new OnHttpClientListener() {
             @Override
             public void onRequestFailure() {
                 Platform.runLater(() -> {
                     statusLabel.setText("Status : 404");
-                    spinnerHbox.setVisible(false);
+                    spinnerLayout.setVisible(false);
                 });
             }
 
             @Override
             public void onRequestSuccessful(HttpResponse response) {
                 Platform.runLater(() -> {
-                    spinnerHbox.setVisible(false);
+                    spinnerLayout.setVisible(false);
                     //Update response Code
                     String responseCode = "Status : " + response.getResponseCode();
                     statusLabel.setText(responseCode);
 
-                    String time = "Time : " + response.getRequestTime() + "ms";
+                    String time = "Time : " + response.getResponseTime() + "ms";
                     timeLabel.setText(time);
+
+                    String size = "Size : " + String.format("%.2f", response.getResponseSize()) + "KB";
+                    sizeLabel.setText(size);
 
                     //Update Response Body
                     String responseBody = response.getResponseBody();
