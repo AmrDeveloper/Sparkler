@@ -113,7 +113,7 @@
                                                     </tabs>
                                                 </TabPane>
                                                 <Label layoutX="14.0" layoutY="264.0" prefHeight="25.0" prefWidth="60.0" text="Response" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="260.0" />
-                                                <Label fx:id="statusLabel" contentDisplay="CENTER" layoutX="375.0" layoutY="264.0" prefHeight="25.0" text="Status :  " AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="260.0" />
+                                                <Label fx:id="statusLabel" contentDisplay="CENTER" layoutX="375.0" layoutY="264.0" prefHeight="25.0" text="Status : 200" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="260.0" />
                                                 <Label fx:id="timeLabel" contentDisplay="CENTER" layoutX="373.0" layoutY="260.0" prefHeight="25.0" prefWidth="80.0" text="Time : 0 ms" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="260.0" />
                                     <Label fx:id="sizeLabel" contentDisplay="CENTER" prefHeight="25.0" prefWidth="70.0" text="Size : 0 KB" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="260.0" />
                                                 <TabPane fx:id="responseTabPane" layoutX="10.0" layoutY="296.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="300.0">
