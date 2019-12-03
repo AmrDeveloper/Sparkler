@@ -23,4 +23,12 @@ Cross platform API request builder to make HTTP with different methods and WebSo
 - Support Cross Platform
 
 ## Screenshots
-<img src="screenshots/request_body_headers.PNG" alt="Mountain"> 
+<img src="screenshots/request_body_headers.PNG" width="600"> 
+
+<img src="screenshots/request_dark_theme.PNG" width="600"> 
+
+<img src="screenshots/request_white_theme.PNG" width="600"> 
+
+<img src="screenshots/settings.PNG" width="600"> 
+
+<img src="screenshots/socket_ui.PNG" width="600"> 
