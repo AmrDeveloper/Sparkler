@@ -1,6 +1,6 @@
 # Sparkler
  
-API request builder to make HTTP with different methods and WebSocket connection and you can send and receive data 
+Cross platform API request builder to make HTTP with different methods and WebSocket connection and you can send and receive data 
 
 ## Dependencies
 - OkHttp 3.8.1
@@ -19,5 +19,8 @@ API request builder to make HTTP with different methods and WebSocket connection
 - Text Editor for response body and support multi languages highlighter and code folding
 - Search in response body and highlight all matches result
 - Copy or clear text with simple one click
+- Can change request timeout connection, read and write data
+- Support Cross Platform
 
 ## Screenshots
+<img src="screenshots/request_body_headers.PNG" alt="Mountain"> 
