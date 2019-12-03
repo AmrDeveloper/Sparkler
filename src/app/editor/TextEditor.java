@@ -158,10 +158,15 @@ public class TextEditor extends SwingComponent {
         SyntaxScheme syntaxScheme = mTextArea.getSyntaxScheme();
         syntaxScheme.setStyle(Token.SEPARATOR, new Style(Color.LIGHT_GRAY));
         syntaxScheme.setStyle(Token.IDENTIFIER, new Style(Color.LIGHT_GRAY));
-        syntaxScheme.setStyle(Token.LITERAL_STRING_DOUBLE_QUOTE,new Style(Color.decode("#f1e669")));
         syntaxScheme.setStyle(Token.VARIABLE,new Style(Color.decode("#50fa7b")));
         syntaxScheme.setStyle(Token.COMMENT_KEYWORD, new Style(Color.black));
         syntaxScheme.setStyle(Token.OPERATOR, new Style(Color.black));
+        syntaxScheme.setStyle(Token.LITERAL_BOOLEAN, new Style(Color.decode("#ba47f0")));
+        syntaxScheme.setStyle(Token.LITERAL_BACKQUOTE, new Style(Color.decode("#ba47f0")));
+        syntaxScheme.setStyle(Token.LITERAL_CHAR, new Style(Color.decode("#ba47f0")));
+        syntaxScheme.setStyle(Token.LITERAL_NUMBER_DECIMAL_INT, new Style(Color.decode("#ba47f0")));
+        syntaxScheme.setStyle(Token.LITERAL_NUMBER_FLOAT, new Style(Color.decode("#ba47f0")));
+        syntaxScheme.setStyle(Token.LITERAL_STRING_DOUBLE_QUOTE,new Style(Color.decode("#f1e669")));
         mTextArea.revalidate();
     }
 
