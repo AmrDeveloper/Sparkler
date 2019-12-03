@@ -21,8 +21,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import org.fife.ui.rtextarea.SearchContext;
-import org.fife.ui.rtextarea.SearchEngine;
 
 import java.net.URL;
 import java.util.*;
@@ -256,6 +254,8 @@ public class MainController implements Initializable {
     }
 
     private void setupResponseSearch(){
+        responseSearchLayout.setVisible(false);
+
         searchIcon.setOnMouseMoved(e -> {
             Tooltip.install(searchIcon, new Tooltip("Open response body search"));
         });
@@ -273,21 +273,11 @@ public class MainController implements Initializable {
             if(newValue.isEmpty()){
                 return;
             }
-
             responseEditorSearch.startSearch(newValue);
         });
 
-        findNextResMatch.setOnMouseClicked(e -> {
-            Platform.runLater(() -> {
-                responseEditorSearch.searchNextMatch();
-            });
-        });
-
-        findPrevResMatch.setOnMouseClicked(e -> {
-            Platform.runLater(() -> {
-                responseEditorSearch.searchPrevMath();
-            });
-        });
+        findNextResMatch.setOnMouseClicked(e -> Platform.runLater(() -> responseEditorSearch.searchNextMatch()));
+        findPrevResMatch.setOnMouseClicked(e -> Platform.runLater(() -> responseEditorSearch.searchPrevMath()));
     }
 
     private void onHistoryListClickAction() {

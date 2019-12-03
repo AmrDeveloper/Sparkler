@@ -132,7 +132,7 @@
                                                                         </VBox>
                                                       <AnchorPane id="searchPane" fx:id="responseSearchLayout" layoutX="350.0" prefHeight="30.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="0.0">
                                                          <children>
-                                                            <TextField fx:id="resSearchField" layoutY="4.0" promptText="Keyword" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="3.0" />
+                                                            <TextField id="responseSearchField" fx:id="resSearchField" layoutY="4.0" promptText="Keyword" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="3.0" />
                                                              <ImageView fx:id="findNextResMatch" fitHeight="20.0" fitWidth="20.0" layoutX="165.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="5.0">
                                                                  <image>
                                                                      <Image requestedHeight="25" requestedWidth="25" url="@../res/arrow_down.png" />

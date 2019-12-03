@@ -11,5 +11,9 @@
 }
 
 #searchPane{
+    -fx-background-color: #cccccc;
+}
 
+#responseSearchField{
+    -fx-background-color: #FAFAFA;
 }

@@ -20,6 +20,10 @@
     -jfx-disable-visual-focus: false;
 }
 
-#searchPane{
+#searchPane {
+    -fx-background-color: #727579;
+}
 
+#responseSearchField{
+    -fx-background-color: #999999;
 }
