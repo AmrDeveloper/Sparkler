@@ -15,12 +15,12 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.image.Image?>
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.MainController">
     <children>
         <MenuBar layoutY="2.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -130,6 +130,21 @@
                                                                                 <Button fx:id="responseBodyClearButton" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Clear" VBox.vgrow="SOMETIMES" />
                                                                             </children>
                                                                         </VBox>
+                                                      <AnchorPane id="searchPane" fx:id="responseSearchLayout" layoutX="350.0" prefHeight="30.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="0.0">
+                                                         <children>
+                                                            <TextField fx:id="resSearchField" layoutY="4.0" promptText="Keyword" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="3.0" />
+                                                             <ImageView fx:id="findNextResMatch" fitHeight="20.0" fitWidth="20.0" layoutX="165.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="5.0">
+                                                                 <image>
+                                                                     <Image requestedHeight="25" requestedWidth="25" url="@../res/arrow_down.png" />
+                                                                 </image>
+                                                             </ImageView>
+                                                             <ImageView fx:id="findPrevResMatch" fitHeight="20.0" fitWidth="20.0" layoutX="211.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                                                 <image>
+                                                                     <Image requestedHeight="25" requestedWidth="25" url="@../res/arrow_up.png" />
+                                                                 </image>
+                                                             </ImageView>
+                                                         </children>
+                                                      </AnchorPane>
                                                                     </children>
                                                                 </AnchorPane>
                                                             </content>
@@ -144,12 +159,17 @@
                                                         </Tab>
                                                     </tabs>
                                                 </TabPane>
-                                    <HBox fx:id="spinnerLayout" alignment="CENTER" layoutX="228.0" layoutY="235.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="222.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="217.0" AnchorPane.topAnchor="222.0">
+                                    <HBox fx:id="spinnerLayout" alignment="CENTER" layoutX="228.0" layoutY="235.0" prefHeight="100.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="222.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="217.0" AnchorPane.topAnchor="222.0">
                                        <children>
                                           <JFXSpinner fx:id="loadingSpinner" />
                                        </children>
                                     </HBox>
                                     <JFXButton fx:id="sendRequestButton" buttonType="RAISED" layoutX="569.0" layoutY="15.0" prefHeight="25.0" prefWidth="65.0" text="Send" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0" />
+                                                <ImageView fx:id="searchIcon" fitHeight="25.0" fitWidth="25.0" layoutX="480.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="260.0">
+                                                    <image>
+                                                        <Image requestedHeight="25" requestedWidth="25" url="@../res/search_icon.png" />
+                                                    </image>
+                                                </ImageView>
                                             </children>
                                         </AnchorPane>
                                     </content>

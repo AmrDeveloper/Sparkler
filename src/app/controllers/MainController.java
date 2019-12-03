@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.editor.EditorSearch;
 import app.model.*;
 
 import app.net.*;
@@ -17,7 +18,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import org.fife.ui.rtextarea.SearchContext;
+import org.fife.ui.rtextarea.SearchEngine;
 
 import java.net.URL;
 import java.util.*;
@@ -34,6 +39,12 @@ public class MainController implements Initializable {
     @FXML private Label statusLabel;
     @FXML private Label timeLabel;
     @FXML private Label sizeLabel;
+
+    @FXML private AnchorPane responseSearchLayout;
+    @FXML private ImageView searchIcon;
+    @FXML private TextField resSearchField;
+    @FXML private ImageView findNextResMatch;
+    @FXML private ImageView findPrevResMatch;
 
     @FXML private TabPane requestTabPane;
     @FXML private Tab requestParamsTab;
@@ -74,6 +85,7 @@ public class MainController implements Initializable {
 
     private TextEditor requestBodyEditor;
     private TextEditor responseBodyEditor;
+    private EditorSearch responseEditorSearch;
 
     private final Settings settings = new Settings();
     private final HttpClient httpClient = new HttpClient();
@@ -81,6 +93,8 @@ public class MainController implements Initializable {
 
     private ObservableList<Request> mRequestHistoryList = FXCollections.observableArrayList();
     private FilteredList<Request> mRequestFilteredList = new FilteredList<>(mRequestHistoryList, s -> true);
+
+    private boolean isResponseSearchOpened = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -91,7 +105,10 @@ public class MainController implements Initializable {
         setupButtons();
         setupMenus();
         historySearchSetup();
+        setupResponseSearch();
         settings.setThemeChangeListener(onThemeChangeListener);
+
+        this.responseEditorSearch = new EditorSearch(responseBodyEditor.getTextArea());
     }
 
     private void setupListViews(){
@@ -235,6 +252,41 @@ public class MainController implements Initializable {
                     break;
                 }
             }
+        });
+    }
+
+    private void setupResponseSearch(){
+        searchIcon.setOnMouseMoved(e -> {
+            Tooltip.install(searchIcon, new Tooltip("Open response body search"));
+        });
+
+        searchIcon.setOnMouseClicked(e -> {
+            if(isResponseSearchOpened){
+                responseSearchLayout.setVisible(false);
+            }else{
+                responseSearchLayout.setVisible(true);
+            }
+            isResponseSearchOpened = !isResponseSearchOpened;
+        });
+
+        resSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue.isEmpty()){
+                return;
+            }
+
+            responseEditorSearch.startSearch(newValue);
+        });
+
+        findNextResMatch.setOnMouseClicked(e -> {
+            Platform.runLater(() -> {
+                responseEditorSearch.searchNextMatch();
+            });
+        });
+
+        findPrevResMatch.setOnMouseClicked(e -> {
+            Platform.runLater(() -> {
+                responseEditorSearch.searchPrevMath();
+            });
         });
     }
 
