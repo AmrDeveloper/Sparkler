@@ -26,23 +26,23 @@ public class RequestListCell extends SparklerListCell<Request> {
         switch (getItem().getMethod()){
             case GET:
                 //Green
-                requestMethodLabel.setTextFill(Color.web("#30d020", 0.8));
+                requestMethodLabel.setTextFill(Color.web("#a9f552", 0.8));
                 break;
             case POST:
                 //Orange
-                requestMethodLabel.setTextFill(Color.web("#f9bd20", 0.8));
+                requestMethodLabel.setTextFill(Color.web("#fac03a", 0.8));
                 break;
             case DELETE:
                 //Red
-                requestMethodLabel.setTextFill(Color.web("#e04d26", 0.8));
+                requestMethodLabel.setTextFill(Color.web("#f66c4d", 0.8));
                 break;
             case PUT:
                 //Blue
-                requestMethodLabel.setTextFill(Color.web("#4dcaef", 0.8));
+                requestMethodLabel.setTextFill(Color.web("#3aebfa", 0.8));
                 break;
             case PATCH:
                 //Purple
-                requestMethodLabel.setTextFill(Color.web("#c83ee7", 0.8));
+                requestMethodLabel.setTextFill(Color.web("#dd3ef9", 0.8));
                 break;
         }
 

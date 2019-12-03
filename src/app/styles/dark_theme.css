@@ -5,10 +5,6 @@
     -fx-base: #252628;
 }
 
-.label{
-    -fx-text-fill: lightgray;
-}
-
 .text-field {
     -fx-prompt-text-fill: #ccc;
     -fx-text-fill: #dbdcdc;
