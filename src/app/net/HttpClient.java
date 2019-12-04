@@ -142,6 +142,12 @@ public class HttpClient {
             case DELETE:
                 requestBuilder = requestBuilder.delete(requestBody);
                 break;
+            case HEAD:
+                requestBuilder = requestBuilder.method("HEAD", requestBody);
+                break;
+            case OPTIONS:
+                requestBuilder = requestBuilder.method("OPTIONS", requestBody);
+                break;
         }
 
         return requestBuilder.build();
