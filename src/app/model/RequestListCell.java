@@ -44,6 +44,14 @@ public class RequestListCell extends SparklerListCell<Request> {
                 //Purple
                 requestMethodLabel.setTextFill(Color.web("#dd3ef9", 0.8));
                 break;
+            case HEAD:
+                //Green
+                requestMethodLabel.setTextFill(Color.web("#a9f552", 0.8));
+                break;
+            case OPTIONS:
+                //Blue
+                requestMethodLabel.setTextFill(Color.web("#3aebfa", 0.8));
+                break;
         }
 
         setGraphic(requestViewLayout);
