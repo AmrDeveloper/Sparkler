@@ -9,7 +9,7 @@ Cross platform API request builder to make HTTP with different methods and WebSo
 - RsyntaxTextArea 3.0.4
 
 ## Features
-- Create HTTP request with different method GET, POST, DELETE, PUT, PATCH
+- Create HTTP request with different method GET, POST, DELETE, PUT, PATCH, HEAD, OPTIONS
 - Support to add Body, Header, Params in Request
 - Create WebSocket Connection and send and receive data
 - Create Socket IO Event Listeners to listen to event with name
