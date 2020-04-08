@@ -11,7 +11,7 @@ public class HeaderListCell extends SparklerListCell<Header> {
     @FXML private TextField responseHeaderKey;
     @FXML private TextField responseHeaderValue;
 
-    private static final String HEADER_VIEW_LAYOUT = "../views/header_view.fxml";
+    private static final String HEADER_VIEW_LAYOUT = "/app/views/header_view.fxml";
 
     public HeaderListCell() {
         super(HEADER_VIEW_LAYOUT);

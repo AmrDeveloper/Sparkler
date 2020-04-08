@@ -12,7 +12,7 @@ public class RequestListCell extends SparklerListCell<Request> {
     @FXML private Label requestUrlLabel;
     @FXML private Label requestMethodLabel;
 
-    private static final String REQUEST_VIEW_LAYOUT = "../views/request_view.fxml";
+    private static final String REQUEST_VIEW_LAYOUT = "/app/views/request_view.fxml";
 
     public RequestListCell() {
         super(REQUEST_VIEW_LAYOUT);

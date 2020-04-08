@@ -13,7 +13,7 @@ public class AttributeListCell extends SparklerListCell<Attribute> {
     @FXML private TextField attributeKeyField;
     @FXML private TextField attributeNameField;
 
-    private static final String EVENT_VIEW_LAYOUT = "../views/attribute_view.fxml";
+    private static final String EVENT_VIEW_LAYOUT = "/app/views/attribute_view.fxml";
 
     public AttributeListCell() {
         super(EVENT_VIEW_LAYOUT);

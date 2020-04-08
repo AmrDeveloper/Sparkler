@@ -19,7 +19,7 @@ public class EventListCell extends SparklerListCell<Event> {
     @FXML private Button listenerButton;
 
     private SocketManager mSocketManager = SocketManager.getInstance();
-    private static final String EVENT_VIEW_LAYOUT = "../views/event_view.fxml";
+    private static final String EVENT_VIEW_LAYOUT = "/app/views/event_view.fxml";
 
     public EventListCell() {
         super(EVENT_VIEW_LAYOUT);

@@ -94,6 +94,8 @@ public class MainController implements Initializable {
 
     private boolean isResponseSearchOpened = false;
 
+    public MainController(){}
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         spinnerLayout.setVisible(false);
