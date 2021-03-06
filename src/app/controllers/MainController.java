@@ -178,7 +178,7 @@ public class MainController implements Initializable {
         settingMenu.setOnAction(e -> {
             Theme currentTheme = Theme.valueOf(settings.getTheme());
             Intent intent = Intent.getIntent();
-            String settingsView = "../views/settings_view.fxml";
+            String settingsView = "/app/views/settings_view.fxml";
             String themePath = ThemeManager.getThemePath(currentTheme);
             intent.showAnotherView(settingsView, "Settings", themePath, new Image("/app/res/sparkler_icon.png"));
         });

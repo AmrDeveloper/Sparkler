@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="Sparkler:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Sparkler_jar</output-path>
+    <output-path>$PROJECT_DIR$/jar</output-path>
     <root id="archive" name="Sparkler.jar">
       <element id="module-output" name="Sparkler" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/socket.io-client-1.0.0.jar" path-in-jar="/" />
