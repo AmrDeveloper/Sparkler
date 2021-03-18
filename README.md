@@ -2,11 +2,18 @@
  
 Cross platform API request builder to make HTTP with different methods and WebSocket connection and you can send and receive data 
 
-## Dependencies
-- OkHttp 3.8.1
-- Socket.IO Client 1.0.0
-- JFoenix 8.0.0
-- RsyntaxTextArea 3.0.4
+[![Download Sparkler](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/sparkler/files/latest/download)
+
+## Screenshots
+<img src="screenshots/request_dark_theme.PNG" width="600"> 
+
+<img src="screenshots/request_body_headers.PNG" width="600"> 
+
+<img src="screenshots/request_white_theme.PNG" width="600"> 
+
+<img src="screenshots/settings.PNG" width="600"> 
+
+<img src="screenshots/socket_ui.PNG" width="600"> 
 
 ## Features
 - Create HTTP request with different method GET, POST, DELETE, PUT, PATCH, HEAD, OPTIONS
@@ -22,13 +29,8 @@ Cross platform API request builder to make HTTP with different methods and WebSo
 - Can change request timeout connection, read and write data
 - Support Cross Platform
 
-## Screenshots
-<img src="screenshots/request_dark_theme.PNG" width="600"> 
-
-<img src="screenshots/request_body_headers.PNG" width="600"> 
-
-<img src="screenshots/request_white_theme.PNG" width="600"> 
-
-<img src="screenshots/settings.PNG" width="600"> 
-
-<img src="screenshots/socket_ui.PNG" width="600"> 
+## Dependencies
+- OkHttp 3.8.1
+- Socket.IO Client 1.0.0
+- JFoenix 8.0.0
+- RsyntaxTextArea 3.0.4
