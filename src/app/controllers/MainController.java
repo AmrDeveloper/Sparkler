@@ -263,11 +263,7 @@ public class MainController implements Initializable {
         });
 
         searchIcon.setOnMouseClicked(e -> {
-            if(isResponseSearchOpened){
-                responseSearchLayout.setVisible(false);
-            }else{
-                responseSearchLayout.setVisible(true);
-            }
+            responseSearchLayout.setVisible(!isResponseSearchOpened);
             isResponseSearchOpened = !isResponseSearchOpened;
         });
 
@@ -279,7 +275,7 @@ public class MainController implements Initializable {
         });
 
         findNextResMatch.setOnMouseClicked(e -> Platform.runLater(() -> responseEditorSearch.searchNextMatch()));
-        findPrevResMatch.setOnMouseClicked(e -> Platform.runLater(() -> responseEditorSearch.searchPrevMath()));
+        findPrevResMatch.setOnMouseClicked(e -> Platform.runLater(() -> responseEditorSearch.searchPrevMatch()));
     }
 
     private void onHistoryListClickAction() {

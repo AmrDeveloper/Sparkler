@@ -7,9 +7,8 @@ import org.fife.ui.rtextarea.SearchEngine;
 public class EditorSearch {
 
     private String mSearchQuery;
-    private RSyntaxTextArea mTextArea;
-
-    private SearchContext mSearchContext;
+    private final RSyntaxTextArea mTextArea;
+    private final SearchContext mSearchContext;
 
     public EditorSearch(RSyntaxTextArea textArea){
         mTextArea = textArea;
@@ -45,7 +44,7 @@ public class EditorSearch {
         }
     }
 
-    public void searchPrevMath(){
+    public void searchPrevMatch(){
         if(mSearchQuery == null || mSearchQuery.isEmpty()){
             return;
         }
