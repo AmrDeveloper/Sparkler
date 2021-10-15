@@ -17,9 +17,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("views/main_view.fxml"));
         primaryStage.setTitle("Sparkler");
-        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/sparkler/res/sparkler_icon.png")));
+        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/resources/icons/sparkler_icon.png")));
         Scene scene = new Scene(root, 800, 600);
-        scene.getStylesheets().add("sparkler/styles/main_theme.css");
+        scene.getStylesheets().add("resources/style/main_theme.css");
         primaryStage.setScene(scene);
         primaryStage.setOnCloseRequest(event -> {
             Platform.exit();

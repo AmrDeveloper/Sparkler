@@ -5,9 +5,9 @@ import javafx.scene.Scene;
 
 public class ThemeManager {
 
-    public static final String MAIN_THEME_PATH = "sparkler/styles/main_theme.css";
-    public static final String DARK_THEME_PATH = "sparkler/styles/dark_theme.css";
-    public static final String WHITE_THEME_PATH = "sparkler/styles/white_theme.css";
+    public static final String MAIN_THEME_PATH = "resources/style/main_theme.css";
+    public static final String DARK_THEME_PATH = "resources/style/dark_theme.css";
+    public static final String WHITE_THEME_PATH = "resources/style/white_theme.css";
 
     public static void setTheme(Scene stage, Theme theme) {
         switch (theme){
