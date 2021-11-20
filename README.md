@@ -5,15 +5,15 @@ Cross platform API request builder to make HTTP with different methods and WebSo
 [![Download Sparkler](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/sparkler/files/latest/download)
 
 ## Screenshots
-<img src="screenshots/request_dark_theme.PNG" width="600"> 
+<img src="media/request_dark_theme.PNG" width="600"> 
 
-<img src="screenshots/request_body_headers.PNG" width="600"> 
+<img src="media/request_body_headers.PNG" width="600"> 
 
-<img src="screenshots/request_white_theme.PNG" width="600"> 
+<img src="media/request_white_theme.PNG" width="600"> 
 
-<img src="screenshots/settings.PNG" width="600"> 
+<img src="media/settings.PNG" width="600"> 
 
-<img src="screenshots/socket_ui.PNG" width="600"> 
+<img src="media/socket_ui.PNG" width="600"> 
 
 ## Features
 - Create HTTP request with different method GET, POST, DELETE, PUT, PATCH, HEAD, OPTIONS
