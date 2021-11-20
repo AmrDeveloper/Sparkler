@@ -26,8 +26,7 @@ import java.util.*;
 
 public class HttpController implements Initializable {
 
-    @FXML
-    private TextField searchTextField;
+    @FXML private TextField searchTextField;
     @FXML private ListView<Request> requestsListView;
 
     @FXML private TextField httpRequestTextField;
@@ -44,23 +43,15 @@ public class HttpController implements Initializable {
     @FXML private ImageView findNextResMatch;
     @FXML private ImageView findPrevResMatch;
 
-    @FXML private TabPane requestTabPane;
-    @FXML private Tab requestParamsTab;
     @FXML private ListView<Attribute> requestParamsListView;
-    @FXML private Tab requestHeadersTab;
     @FXML private ListView<Attribute> requestHeadersListView;
-    @FXML private Tab requestBodyTab;
-
-    @FXML private TabPane requestBodyTabPane;
     @FXML private ListView<Attribute> requestBodyDataListView;
     @FXML private ComboBox<Language> requestBodyRowComboBox;
+
     @FXML private SwingNode requestBodyNode;
     @FXML private Button requestBodyRowCopyButton;
     @FXML private Button requestBodyRowClearButton;
 
-    @FXML private TabPane responseTabPane;
-    @FXML private Tab responseBodyTab;
-    @FXML private Tab responseHeadersTab;
     @FXML private ListView<Header> responseHeaderListView;
     @FXML private SwingNode responseBodyNode;
     @FXML private ComboBox<Language> responseBodyComboBox;
@@ -85,6 +76,7 @@ public class HttpController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         spinnerLayout.setVisible(false);
 
+        setupViewsTooltip();
         setupEditors();
         setupListViews();
         setupComboBoxes();
@@ -93,6 +85,13 @@ public class HttpController implements Initializable {
         setupResponseSearch();
 
         this.responseEditorSearch = new EditorSearch(responseBodyEditor.getTextArea());
+    }
+
+    private void setupViewsTooltip() {
+        Tooltip.install(sendRequestButton, new Tooltip("Send Request to the server"));
+        Tooltip.install(responseBodyCopyButton, new Tooltip("Copy response body"));
+        Tooltip.install(responseBodyClearButton, new Tooltip("Clear response body"));
+        Tooltip.install(searchIcon, new Tooltip("Open response body search"));
     }
 
     private void setupListViews(){
@@ -126,8 +125,6 @@ public class HttpController implements Initializable {
 
     private void setupButtons() {
         sendRequestButton.setOnMouseClicked(e -> makeHttpRequestButton());
-
-        //Copy and clear actions
         requestBodyRowCopyButton.setOnMouseClicked(event -> ClipboardUtils.copyEditorText(requestBodyEditor));
         requestBodyRowClearButton.setOnMouseClicked(event -> requestBodyEditor.clearText());
         responseBodyCopyButton.setOnMouseClicked(event -> ClipboardUtils.copyEditorText(responseBodyEditor));
@@ -149,9 +146,9 @@ public class HttpController implements Initializable {
 
     private void historySearchSetup(){
         searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue != null && !newValue.isEmpty()){
+            if (newValue != null && !newValue.isEmpty()) {
                 mRequestFilteredList.setPredicate(s -> s.getUrl().contains(newValue));
-            }else{
+            } else {
                 mRequestFilteredList.setPredicate(s -> true);
             }
         });
@@ -216,20 +213,13 @@ public class HttpController implements Initializable {
 
     private void setupResponseSearch(){
         responseSearchLayout.setVisible(false);
-
-        searchIcon.setOnMouseMoved(e -> {
-            Tooltip.install(searchIcon, new Tooltip("Open response body search"));
-        });
-
         searchIcon.setOnMouseClicked(e -> {
             responseSearchLayout.setVisible(!isResponseSearchOpened);
             isResponseSearchOpened = !isResponseSearchOpened;
         });
 
         resSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue.isEmpty()){
-                return;
-            }
+            if (newValue.isEmpty()) return;
             responseEditorSearch.startSearch(newValue);
         });
 
@@ -239,9 +229,7 @@ public class HttpController implements Initializable {
 
     private void onHistoryListClickAction() {
         Request currentRequest = requestsListView.getSelectionModel().getSelectedItem();
-        if (currentRequest == null) {
-            return;
-        }
+        if (currentRequest == null) return;
         httpRequestTextField.setText(currentRequest.getUrl());
         httpReqComboBox.getSelectionModel().select(currentRequest.getMethod());
     }
@@ -327,57 +315,45 @@ public class HttpController implements Initializable {
     private void parseRequestParams(HttpRequest request){
         Map<String, String> paramsMap = new HashMap<>();
         for (Attribute attribute : requestParamsListView.getItems()) {
-            if (attribute.getKey().isEmpty() ||
-                    attribute.getValue().isEmpty() ||
-                    !attribute.isUserChoice()) {
+            if (attribute.getKey().isEmpty() || attribute.getValue().isEmpty() || !attribute.isUserChoice()) {
                 continue;
             }
             paramsMap.putIfAbsent(attribute.getKey(), attribute.getValue());
         }
-        if (!paramsMap.isEmpty()) {
-            request.setRequestParams(paramsMap);
-        }
+        if (paramsMap.isEmpty()) return;
+        request.setRequestParams(paramsMap);
     }
 
     private void parseRequestHeaders(HttpRequest request){
         Map<String, String> headerMap = new HashMap<>();
         for (Attribute attribute : requestHeadersListView.getItems()) {
-            if (attribute.getKey().isEmpty() ||
-                    attribute.getValue().isEmpty() ||
-                    !attribute.isUserChoice()) {
+            if (attribute.getKey().isEmpty() || attribute.getValue().isEmpty() || !attribute.isUserChoice()) {
                 continue;
             }
             headerMap.putIfAbsent(attribute.getKey(), attribute.getValue());
         }
-        if (!headerMap.isEmpty()) {
-            request.setRequestHeaders(headerMap);
-        }
+        if (headerMap.isEmpty()) return;
+        request.setRequestHeaders(headerMap);
     }
 
     private void parseRequestBody(HttpRequest request){
         List<Attribute> bodyList = new ArrayList<>(requestBodyDataListView.getItems());
         Map<String, String> bodyMap = new HashMap<>(bodyList.size());
         for (Attribute attribute : bodyList) {
-            if (attribute.getKey().isEmpty() ||
-                    attribute.getValue().isEmpty() ||
-                    !attribute.isUserChoice()) {
+            if (attribute.getKey().isEmpty() || attribute.getValue().isEmpty() || !attribute.isUserChoice()) {
                 continue;
             }
             bodyMap.putIfAbsent(attribute.getKey(), attribute.getValue());
         }
-        if (!bodyMap.isEmpty()) {
-            request.setRequestBodyMap(bodyMap);
-        }
+        if (bodyMap.isEmpty()) return;
+        request.setRequestBodyMap(bodyMap);
     }
 
     private void bindHeaderListView(Map<String, List<String>> headers){
         for (String key : headers.keySet()) {
             List<String> values = headers.get(key);
-            if (values.size() == 1) {
-                responseHeaderListView.getItems().add(new Header(key, values.get(0)));
-            } else {
-                responseHeaderListView.getItems().add(new Header(key, values.toString()));
-            }
+            Header header = values.size() == 1 ? new Header(key, values.get(0)) : new Header(key, values.toString());
+            responseHeaderListView.getItems().add(header);
         }
     }
 }
