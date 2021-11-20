@@ -40,20 +40,23 @@ public class HttpClient {
         this.settings.setOnTimeoutChange(onTimeoutChangeListener);
     }
 
-    public void makeHttpRequest(HttpRequest request, OnHttpClientListener listener) {
+    public void makeHttpRequest(HttpRequest request, OnHttpRequestSuccessful onSuccess, OnHttpRequestFailure onFailure) {
         Request httpRequest = createHttpClientRequest(request);
         mHttpClient.newCall(httpRequest).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                listener.onRequestFailure();
-            }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 int responseCode = response.code();
-                String responseBody = response.body().string();
+
+                String responseBody = "";
+                ResponseBody responseBodyObj = response.body();
+                if (responseBodyObj != null) {
+                    responseBody = responseBodyObj.string();
+                }
+
                 Map<String, List<String>> headersMap = response.headers().toMultimap();
                 String contentType = Objects.requireNonNull(response.header("Content-Type")).split(";")[0];
+
                 Language contentLanguage = Language.TEXT;
                 if (contentType.contains("json")) {
                     contentLanguage = Language.JSON;
@@ -74,7 +77,12 @@ public class HttpClient {
                         responseBody, contentLanguage,
                         headersMap);
 
-                listener.onRequestSuccessful(httpResponse);
+                onSuccess.onRequestSuccessful(httpResponse);
+            }
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                onFailure.onRequestFailure(e);
             }
         });
     }
@@ -154,7 +162,7 @@ public class HttpClient {
     }
 
     private String bindQueryParameter(String requestUrl, Map<String, String> queryParams) {
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(requestUrl).newBuilder();
+        HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(requestUrl)).newBuilder();
         for (String key : queryParams.keySet()) {
             urlBuilder.addQueryParameter(key, queryParams.get(key));
         }
@@ -171,12 +179,13 @@ public class HttpClient {
     private RequestBody bindRequestBody(Map<String, String> bodyMap) {
         FormBody.Builder formBody = new FormBody.Builder();
         for (String key : bodyMap.keySet()) {
-            formBody = formBody.add(key, bodyMap.get(key));
+            formBody.add(key, bodyMap.get(key));
         }
         return formBody.build();
     }
 
-    private OnTimeoutChangeListener onTimeoutChangeListener = new OnTimeoutChangeListener() {
+    private final OnTimeoutChangeListener onTimeoutChangeListener = new OnTimeoutChangeListener() {
+
         @Override
         public void onConnectTimeChange(int time) {
             connectTimeout = time;

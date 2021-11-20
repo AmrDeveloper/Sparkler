@@ -269,46 +269,40 @@ public class HttpController implements Initializable {
 
         spinnerLayout.setVisible(true);
 
-        httpClient.makeHttpRequest(request, new OnHttpClientListener() {
-            @Override
-            public void onRequestFailure() {
-                Platform.runLater(() -> {
-                    statusLabel.setText("Status : 404");
-                    spinnerLayout.setVisible(false);
-                });
-            }
+        httpClient.makeHttpRequest(request, response -> {
+            Platform.runLater(() -> {
+                spinnerLayout.setVisible(false);
 
-            @Override
-            public void onRequestSuccessful(HttpResponse response) {
-                Platform.runLater(() -> {
-                    spinnerLayout.setVisible(false);
-                    //Update response Code
-                    String responseCode = "Status : " + response.getResponseCode();
-                    statusLabel.setText(responseCode);
+                //Update response Code
+                String responseCode = "Status : " + response.getResponseCode();
+                statusLabel.setText(responseCode);
 
-                    String time = "Time : " + response.getResponseTime() + "ms";
-                    timeLabel.setText(time);
+                String time = "Time : " + response.getResponseTime() + "ms";
+                timeLabel.setText(time);
 
-                    String size = "Size : " + String.format("%.2f", response.getResponseSize()) + "KB";
-                    sizeLabel.setText(size);
+                String size = "Size : " + String.format("%.2f", response.getResponseSize()) + "KB";
+                sizeLabel.setText(size);
 
-                    //Update Response Body
-                    String responseBody = response.getResponseBody();
-                    responseBodyEditor.changeLanguage(response.getContentType());
-                    responseBodyEditor.setFormattedText(responseBody);
+                //Update Response Body
+                String responseBody = response.getResponseBody();
+                responseBodyEditor.changeLanguage(response.getContentType());
+                responseBodyEditor.setFormattedText(responseBody);
 
-                    //Update headers
-                    Map<String, List<String>> headers = response.getHeaders();
-                    bindHeaderListView(headers);
+                //Update headers
+                bindHeaderListView(response.getHeaders());
 
-                    //Update Language
-                    responseBodyComboBox.getSelectionModel().select(response.getContentType());
+                //Update Language
+                responseBodyComboBox.getSelectionModel().select(response.getContentType());
 
-                    //Insert this request to history
-                    Request history = new Request(request.getRequestUrl(), request.getRequestMethod());
-                    mRequestHistoryList.add(history);
-                });
-            }
+                //Insert this request to history
+                Request history = new Request(request.getRequestUrl(), request.getRequestMethod());
+                mRequestHistoryList.add(history);
+            });
+        }, exception -> {
+            Platform.runLater(() -> {
+                spinnerLayout.setVisible(false);
+                statusLabel.setText("Status : 404");
+            });
         });
     }
 
