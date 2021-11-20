@@ -9,7 +9,6 @@ import com.jfoenix.controls.JFXToggleButton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,7 +16,6 @@ import java.util.ResourceBundle;
 public class SettingsController implements Initializable {
 
     @FXML private JFXButton settingsSaveButton;
-    @FXML private JFXButton settingsCloseButton;
     @FXML private JFXToggleButton themeToggleButton;
     @FXML private TextField connectTimeoutValue;
     @FXML private TextField readTimeoutValue;
@@ -51,24 +49,12 @@ public class SettingsController implements Initializable {
                 return;
             }
 
-            boolean isDark = themeToggleButton.isSelected();
-            if(isDark){
-                settings.setTheme(Theme.DARK);
-            }else{
-                settings.setTheme(Theme.WHITE);
-            }
+            Theme theme = themeToggleButton.isSelected() ? Theme.DARK : Theme.WHITE;
+            settings.setTheme(theme);
 
             settings.setConnectTimeout(Integer.parseInt(connectTimeoutTxt));
             settings.setReadTimeout(Integer.parseInt(readTimeoutTxt));
             settings.setWriteTimeout(Integer.parseInt(writeTimeoutTxt));
-
-            Stage stage = (Stage) settingsSaveButton.getScene().getWindow();
-            stage.close();
-        });
-
-        settingsCloseButton.setOnMouseClicked(e -> {
-            Stage stage = (Stage) settingsCloseButton.getScene().getWindow();
-            stage.close();
         });
     }
 
@@ -85,9 +71,7 @@ public class SettingsController implements Initializable {
     }
 
     private void setupToggleThemeButton(){
-        boolean isDark = settings.getTheme().equals("DARK");
-        if(isDark){
-            themeToggleButton.setSelected(true);
-        }
+        boolean isDark = "DARK".equals(settings.getTheme());
+        if(isDark) themeToggleButton.setSelected(true);
     }
 }

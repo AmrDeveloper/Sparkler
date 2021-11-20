@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public abstract class SparklerListCell<T> extends ListCell<T> {
 
-    private String mViewPath;
+    private final String mViewPath;
     private FXMLLoader mViewLoader;
 
     public abstract void onViewUpdate();

@@ -1,5 +1,6 @@
 package sparkler;
 
+import sparkler.model.AppInfo;
 import sparkler.utils.Settings;
 import sparkler.utils.Theme;
 import sparkler.utils.ThemeManager;
@@ -11,15 +12,15 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class SparklerApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("views/main_view.fxml"));
-        primaryStage.setTitle("Sparkler");
-        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/resources/icons/sparkler_icon.png")));
-        Scene scene = new Scene(root, 800, 600);
-        scene.getStylesheets().add("resources/style/main_theme.css");
+        Parent root = FXMLLoader.load(getClass().getResource(AppInfo.MAIN_VIEW_PATH));
+        primaryStage.setTitle(AppInfo.APP_NAME);
+        primaryStage.getIcons().add(new Image(SparklerApp.class.getResourceAsStream(AppInfo.APP_ICON)));
+        Scene scene = new Scene(root, AppInfo.DEFAULT_WIDTH, AppInfo.DEFAULT_HEIGHT);
+        scene.getStylesheets().add(AppInfo.MAIN_STYLESHEET_PATH);
         primaryStage.setScene(scene);
         primaryStage.setOnCloseRequest(event -> {
             Platform.exit();

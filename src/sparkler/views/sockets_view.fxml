@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sparkler.controllers.SocketsController">
+   <children>
+      <TextField fx:id="socketUrlTextField" layoutX="74.0" layoutY="14.0" prefHeight="25.0" prefWidth="486.0" promptText="Socket Url" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="15.0" />
+      <JFXButton fx:id="socketConnectButton" layoutX="569.0" layoutY="14.0" mnemonicParsing="false" text="Connect" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0" />
+      <Label layoutX="11.0" layoutY="19.0" text="Socket Url : " AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="15.0" />
+      <TextField fx:id="socketEmitKey" layoutX="75.0" layoutY="63.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" promptText="Key" AnchorPane.leftAnchor="75.0" />
+      <TextField fx:id="socketEmitValue" layoutX="411.0" layoutY="63.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="359.0" promptText="Value" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="75.0" />
+      <JFXButton fx:id="socketEmitButton" layoutX="569.0" layoutY="63.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Emit" AnchorPane.rightAnchor="5.0" />
+      <Label layoutX="14.0" layoutY="67.0" text="Emit         :" AnchorPane.leftAnchor="5.0" />
+      <ListView fx:id="socketEventListView" layoutX="14.0" layoutY="106.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="150.0" />
+      <Label layoutX="10.0" layoutY="110.0" text="Event Listeners" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="110.0" />
+      <JFXButton fx:id="socketEventAddListener" buttonType="RAISED" layoutX="443.0" layoutY="110.0" prefHeight="25.0" prefWidth="60.0" text="Add" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="110.0" />
+   </children>
+</AnchorPane>
