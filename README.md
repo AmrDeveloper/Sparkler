@@ -28,6 +28,7 @@ Cross platform API request builder to make HTTP with different methods and WebSo
 - Copy or clear text with simple one click
 - Can change request timeout connection, read and write data
 - Support Cross Platform
+- Dynamic Environment variables
 
 ## Dependencies
 - OkHttp 3.8.1
