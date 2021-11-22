@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import sparkler.utils.Environment;
 import sparkler.editor.EditorSearch;
 import sparkler.editor.Language;
 import sparkler.editor.TextEditor;
@@ -23,6 +24,8 @@ import sparkler.utils.Theme;
 
 import java.net.URL;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class HttpController implements Initializable {
 
@@ -68,6 +71,9 @@ public class HttpController implements Initializable {
 
     private final Settings settings = new Settings();
     private final HttpClient httpClient = new HttpClient();
+    private final Environment environment = new Environment();
+
+    private static final Pattern attributePattern = Pattern.compile("\\{\\{(?<ATTRIBUTE>[a-zA-Z_]+)}}");
 
     private final ObservableList<Request> mRequestHistoryList = FXCollections.observableArrayList();
     private final FilteredList<Request> mRequestFilteredList = new FilteredList<>(mRequestHistoryList, s -> true);
@@ -237,9 +243,10 @@ public class HttpController implements Initializable {
     private void makeHttpRequestButton(){
         String requestUrl = httpRequestTextField.getText();
         if (requestUrl.isEmpty()) {
-            //TODO : will show dialog later
             return;
         }
+
+        requestUrl = preprocessorRequestUrl(requestUrl);
 
         HttpRequest request = new HttpRequest(requestUrl, httpReqComboBox.getValue());
 
@@ -304,6 +311,19 @@ public class HttpController implements Initializable {
                 statusLabel.setText("Status : 404");
             });
         });
+    }
+
+    private String preprocessorRequestUrl(String url) {
+        Matcher matcher = attributePattern.matcher(url);
+        String processedUrl = url;
+        while (matcher.find()) {
+            String attributeName = matcher.group("ATTRIBUTE");
+            String attributeValue = environment.getActiveVariableValue(attributeName);
+            if (!attributeValue.isEmpty()) {
+                processedUrl = processedUrl.replaceAll("\\{\\{" + attributeName + "}}", attributeValue);
+            }
+        }
+        return processedUrl;
     }
 
     private void parseRequestParams(HttpRequest request){
